@@ -1,9 +1,8 @@
 import {AppBar, Box, Toolbar, Typography, Button, IconButton} from '@mui/material';
-// import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from "react-router-dom";
 
 function Header() {
-    return <Box sx={{ flexGrow: 1 }}>
+    return <Box component="div">
         <AppBar position="static">
             <Toolbar>
                 <IconButton
@@ -15,7 +14,7 @@ function Header() {
                 >
                 </IconButton>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    Ecommerce
+                    DeFI
                 </Typography>
                 <Button color="inherit">
                     <Link to="/">Home</Link>

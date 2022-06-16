@@ -1,11 +1,18 @@
 import { AppBar, Box, Toolbar, Typography, Button, IconButton } from '@mui/material';
 import { Link } from "react-router-dom";
 import {ethers} from 'ethers';
+import {useDispatch, useSelector} from "react-redux";
+import {connect} from '../stores/web3';
 
 function Header() {
-    const connect = async () => {
+    const dispatch = useDispatch();
+    const data = useSelector(state => state.web3);
+
+    const connectHandler = async () => {
+        console.log('connectHandler');
         const provider = new ethers.providers.Web3Provider(window.ethereum)
         const accounts = await provider.send("eth_requestAccounts", []);
+        dispatch(connect({provider, signer: provider.getSigner(), account: accounts[0]}));
     }
 
     return <Box component="div">
@@ -25,9 +32,7 @@ function Header() {
                 <Button color="inherit">
                     <Link to="/">Home</Link>
                 </Button>
-                <Button color="inherit" onClick={connect}>
-                    Connect
-                </Button>
+                {data.account ? <Button color="inherit">Profile</Button> :  <Button color="inherit" onClick={connectHandler}>Connect</Button>}
             </Toolbar>
         </AppBar>
     </Box>

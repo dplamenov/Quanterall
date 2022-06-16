@@ -9,7 +9,6 @@ function Header() {
     const data = useSelector(state => state.web3);
 
     const connectHandler = async () => {
-        console.log('connectHandler');
         const provider = new ethers.providers.Web3Provider(window.ethereum)
         const accounts = await provider.send("eth_requestAccounts", []);
         dispatch(connect({provider, signer: provider.getSigner(), account: accounts[0]}));
@@ -32,7 +31,7 @@ function Header() {
                 <Button color="inherit">
                     <Link to="/">Home</Link>
                 </Button>
-                {data.account ? <Button color="inherit">Profile</Button> :  <Button color="inherit" onClick={connectHandler}>Connect</Button>}
+                {data.account ? <Button color="inherit"><Link to="/profile">Profile</Link></Button> :  <Button color="inherit" onClick={connectHandler}>Connect</Button>}
             </Toolbar>
         </AppBar>
     </Box>

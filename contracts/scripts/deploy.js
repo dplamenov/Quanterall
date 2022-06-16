@@ -5,6 +5,7 @@
 // Runtime Environment's members available in the global scope.
 const hre = require("hardhat");
 const ethers = require("ethers");
+const fs = require("fs");
 
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
@@ -35,6 +36,21 @@ async function main() {
   await marketplace.deployed();
 
   console.log("Marketplace deployed to:", marketplace.address);
+
+  const NFTTokenABI = JSON.parse(fs.readFileSync('artifacts/contracts/NFTToken.sol/NFTToken.json', {encoding: 'utf-8'})).abi;
+  const NFTABI = JSON.parse(fs.readFileSync('artifacts/contracts/NFT.sol/NFT.json', {encoding: 'utf-8'})).abi;
+  const MarketplaceABI = JSON.parse(fs.readFileSync('artifacts/contracts/Marketplace.sol/Marketplace.json', {encoding: 'utf-8'})).abi;
+
+  fs.writeFileSync('../frontend/src/contracts/NFTTokenABI.json', JSON.stringify(NFTTokenABI));
+  fs.writeFileSync('../frontend/src/contracts/NFTABI.json', JSON.stringify(NFTABI));
+  fs.writeFileSync('../frontend/src/contracts/MarketplaceABI.json', JSON.stringify(MarketplaceABI));
+
+  fs.writeFileSync('../frontend/src/contracts/contracts.json', JSON.stringify({
+    NFTToken: nftToken.address,
+    NFT: nft.address,
+    Marketplace: marketplace.address
+  }));
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere

@@ -34,10 +34,13 @@ function NFTPage() {
     }
   };
 
+  const buyHandler = () => {
+
+  };
+
   useEffect(() => {
     load(+params.id).then(nft => {
       setItem(nft);
-      console.log(nft);
     });
   }, []);
 
@@ -47,7 +50,7 @@ function NFTPage() {
     <img src={item?.image} alt={item?.title} width="50%"/>
     <Typography component='p' variant='p'>Description: {item?.description}</Typography>
     <Typography component='p' variant='p'>Price: {ethers.utils.formatEther(item?.price || 0)} NFTToken</Typography>
-    <Button variant='contained'>Buy</Button>
+    <Button variant='contained' onClick={buyHandler}>Buy</Button>
   </>
 }
 

@@ -1,6 +1,6 @@
 import Header from "./components/Header";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import {Provider, useSelector} from 'react-redux';
+import {Provider} from 'react-redux';
 import {store} from './stores/store';
 import Profile from "./pages/Profile";
 import HomePage from "./pages/HomePage";

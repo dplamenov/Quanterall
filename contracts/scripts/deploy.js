@@ -37,18 +37,31 @@ async function main() {
 
   console.log("Marketplace deployed to:", marketplace.address);
 
+  const TokenMarketplace = await hre.ethers.getContractFactory("TokenMarketplace");
+  const tokenMarketplace = await TokenMarketplace.deploy(nftToken.address, ethers.BigNumber.from("50000000000000000000"));
+
+  await tokenMarketplace.deployed();
+
+  await nftToken.transfer(tokenMarketplace.address, ethers.BigNumber.from("50000000000000000000"));
+
+  console.log("TokenMarketplace deployed to:", tokenMarketplace.address);
+
   const NFTTokenABI = JSON.parse(fs.readFileSync('artifacts/contracts/NFTToken.sol/NFTToken.json', {encoding: 'utf-8'})).abi;
   const NFTABI = JSON.parse(fs.readFileSync('artifacts/contracts/NFT.sol/NFT.json', {encoding: 'utf-8'})).abi;
   const MarketplaceABI = JSON.parse(fs.readFileSync('artifacts/contracts/Marketplace.sol/Marketplace.json', {encoding: 'utf-8'})).abi;
+  const TokenMarketplaceABI = JSON.parse(fs.readFileSync('artifacts/contracts/TokenMarketplace.sol/TokenMarketplace.json', {encoding: 'utf-8'})).abi;
+
 
   fs.writeFileSync('../frontend/src/contracts/NFTTokenABI.json', JSON.stringify(NFTTokenABI));
   fs.writeFileSync('../frontend/src/contracts/NFTABI.json', JSON.stringify(NFTABI));
   fs.writeFileSync('../frontend/src/contracts/MarketplaceABI.json', JSON.stringify(MarketplaceABI));
+  fs.writeFileSync('../frontend/src/contracts/TokenMarketplaceABI.json', JSON.stringify(TokenMarketplaceABI));
 
   fs.writeFileSync('../frontend/src/contracts/contracts.json', JSON.stringify({
     NFTToken: nftToken.address,
     NFT: nft.address,
-    Marketplace: marketplace.address
+    Marketplace: marketplace.address,
+    TokenMarketplace: tokenMarketplace.address
   }));
 
 }

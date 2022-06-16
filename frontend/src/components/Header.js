@@ -12,7 +12,21 @@ function Header() {
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const accounts = await provider.send("eth_requestAccounts", []);
     dispatch(connect({provider, signer: provider.getSigner(), account: accounts[0]}));
-  }
+  };
+
+  const ConnectedNavigation = () => {
+    return <>
+      <Button color="inherit"><Link to="/profile">Marketplace</Link></Button>
+      <Button color="inherit"><Link to="/profile">Create</Link></Button>
+      <Button color="inherit"><Link to="/profile">Profile</Link></Button>
+    </>
+  };
+
+  const GuestNavigation = () => {
+    return <>
+      <Button color="inherit" onClick={connectHandler}>Connect</Button>
+    </>
+  };
 
   return <Box component="div">
     <AppBar position="static">
@@ -31,7 +45,7 @@ function Header() {
         <Button color="inherit">
           <Link to="/">Home</Link>
         </Button>
-        {data.account ? <Button color="inherit"><Link to="/profile">Profile</Link></Button> :  <Button color="inherit" onClick={connectHandler}>Connect</Button>}
+        {data.account ? <ConnectedNavigation />:  <GuestNavigation />}
       </Toolbar>
     </AppBar>
   </Box>

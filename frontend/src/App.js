@@ -6,6 +6,8 @@ import Profile from "./pages/Profile";
 import HomePage from "./pages/HomePage";
 import {Container} from "@mui/material";
 import PrivateRoute from "./PrivateRoute";
+import Create from "./pages/Create";
+import Marketplace from "./pages/Marketplace";
 
 function App() {
   return (
@@ -16,7 +18,9 @@ function App() {
           <Routes>
             <Route exact path="/" element={<HomePage />} />
             <Route path='/profile' element={<PrivateRoute element={<Profile />}/>} />
-        </Routes>
+            <Route path='/create' element={<PrivateRoute element={<Create />}/>} />
+            <Route path='/marketplace' element={<PrivateRoute element={<Marketplace />}/>} />
+          </Routes>
         </Container>
       </BrowserRouter>
     </Provider>

@@ -9,6 +9,7 @@ import PrivateRoute from "./PrivateRoute";
 import Create from "./pages/Create";
 import Marketplace from "./pages/Marketplace";
 import NFTToken from "./pages/NFTToken";
+import NFTPage from "./pages/NFTPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path='/create' element={<PrivateRoute element={<Create />}/>} />
             <Route path='/marketplace' element={<PrivateRoute element={<Marketplace />}/>} />
             <Route path='/nft-token' element={<PrivateRoute element={<NFTToken />}/>} />
+            <Route path='/nft/:id' element={<PrivateRoute element={<NFTPage />}/>} />
           </Routes>
         </Container>
       </BrowserRouter>

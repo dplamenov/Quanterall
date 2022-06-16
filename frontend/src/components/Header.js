@@ -2,7 +2,8 @@ import { AppBar, Box, Toolbar, Typography, Button, IconButton } from '@mui/mater
 import { Link } from "react-router-dom";
 import {ethers} from 'ethers';
 import {useDispatch, useSelector} from "react-redux";
-import {connect} from '../stores/web3';
+import {connect, loadContracts} from '../stores/web3';
+import contracts from "../contracts/contracts.json";
 
 function Header() {
   const dispatch = useDispatch();
@@ -12,6 +13,17 @@ function Header() {
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const accounts = await provider.send("eth_requestAccounts", []);
     dispatch(connect({provider, signer: provider.getSigner(), account: accounts[0]}));
+
+    const contractsMap = {};
+
+    Promise.all(...[Object.entries(contracts).map(async ([name]) => {
+      return [await import('../contracts/' + name + 'ABI.json'), name];
+    })]).then((data) => {
+      data.forEach(contract => {
+        contractsMap[contract[1]] = new ethers.Contract(contracts[contract[1]], contract[0].default, provider.signer);
+      });
+      dispatch(loadContracts({contracts: contractsMap}));
+    });
   };
 
   const ConnectedNavigation = () => {

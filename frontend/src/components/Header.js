@@ -1,7 +1,13 @@
-import {AppBar, Box, Toolbar, Typography, Button, IconButton} from '@mui/material';
+import { AppBar, Box, Toolbar, Typography, Button, IconButton } from '@mui/material';
 import { Link } from "react-router-dom";
+import {ethers} from 'ethers';
 
 function Header() {
+    const connect = async () => {
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+        const accounts = await provider.send("eth_requestAccounts", []);
+    }
+
     return <Box component="div">
         <AppBar position="static">
             <Toolbar>
@@ -19,14 +25,8 @@ function Header() {
                 <Button color="inherit">
                     <Link to="/">Home</Link>
                 </Button>
-                <Button color="inherit">
-                    <Link to="/products">Products</Link>
-                </Button>
-                <Button color="inherit">
-                    <Link to="/categories">Categories</Link>
-                </Button>
-                <Button color="inherit">
-                    <Link to="/cart">Cart</Link>
+                <Button color="inherit" onClick={connect}>
+                    Connect
                 </Button>
             </Toolbar>
         </AppBar>

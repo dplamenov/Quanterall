@@ -7,11 +7,14 @@ import {useEffect, useState} from "react";
 import NFTABI from "../contracts/NFTABI.json";
 import {useParams} from "react-router";
 import * as React from "react";
+import NFTTokenABI from "../contracts/NFTTokenABI.json";
 
 function NFTPage() {
   const signer = useSelector(state => state.web3.signer);
 
   const marketplace = new ethers.Contract(contracts.Marketplace, marketplaceABI, signer);
+  const nftToken = new ethers.Contract(contracts.NFTToken, NFTTokenABI, signer);
+
   const nft = new ethers.Contract(contracts.NFT, NFTABI, signer);
   const [item, setItem] = useState();
 
@@ -34,8 +37,11 @@ function NFTPage() {
     }
   };
 
-  const buyHandler = () => {
-
+  const buyHandler = async () => {
+    //increaseAllowance //ethers.utils.parseEther()
+    console.log(item.price.toString(), ethers.utils.parseEther(item.price.toString()));
+    await nftToken.increaseAllowance(marketplace.address, ethers.utils.parseEther(item.price.toString()));
+    await marketplace.purchaseItem(item.itemId)
   };
 
   useEffect(() => {

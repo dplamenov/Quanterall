@@ -49,7 +49,7 @@ function Create() {
         <Input type="file" onChange={uploadFileHandler}/>
         <TextField id="title-input" label="Title" variant="outlined" onChange={e => setTitle(e.target.value)} value={title}/>
         <TextField id="description-input" label="Description" variant="outlined" onChange={e => setDescription(e.target.value)} value={description}/>
-        <TextField id="price-input" label="Input" variant="outlined" onChange={e => setPrice(e.target.value)} value={price}/>
+        <TextField id="price-input" label="Price" variant="outlined" onChange={e => setPrice(e.target.value)} value={price}/>
         <Button onClick={handleCreate}>Create</Button>
       </Container>
     </>

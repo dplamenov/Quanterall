@@ -24,7 +24,7 @@ function NFT({item}) {
         Description: {item.description}
       </Typography>
       <Typography variant="body2" color="text.secondary" component='p'>
-        Price: {ethers.utils.formatEther(item.price)}
+        Price: {ethers.utils.formatEther(item.price)} NFTToken
       </Typography>
     </CardContent>
     <CardActions>

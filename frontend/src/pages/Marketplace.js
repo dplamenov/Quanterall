@@ -1,4 +1,4 @@
-import {Typography} from "@mui/material";
+import {Container, Typography} from "@mui/material";
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import contracts from "../contracts/contracts.json";
@@ -35,7 +35,7 @@ function Marketplace() {
       listedItems.push(item);
     }
 
-    setListedItems(listedItems)
+    setListedItems(listedItems);
   }
 
   useEffect(() => {
@@ -44,9 +44,11 @@ function Marketplace() {
 
   return <>
     <Typography variant='h1' component='h1'>Marketplace</Typography>
-    {listedItems.map(item => {
-      return <NFT key={item.itemId} item={item}/>
-    })}
+    <Container sx={{display: 'flex', gap: '20px', flexWrap: 'wrap'}} maxWidth={false} disableGutters>
+      {listedItems.map((item, k) => {
+        return <NFT key={k} item={item}/>
+      })}
+    </Container>
   </>
 }
 

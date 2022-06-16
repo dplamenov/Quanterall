@@ -8,6 +8,7 @@ contract Marketplace is ReentrancyGuard {
     address payable public immutable feeAccount;
     uint256 public immutable feePercent;
     uint256 public itemCount;
+    address payable public tokenAddress;
 
     struct Item {
         uint256 itemId;
@@ -37,9 +38,10 @@ contract Marketplace is ReentrancyGuard {
         address indexed buyer
     );
 
-    constructor(uint256 _feePercent) {
+    constructor(uint256 _feePercent, address _tokenAddress) {
         feeAccount = payable(msg.sender);
         feePercent = _feePercent;
+        tokenAddress = payable(_tokenAddress);
     }
 
     function makeItem(

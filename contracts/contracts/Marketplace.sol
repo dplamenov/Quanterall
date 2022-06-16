@@ -3,6 +3,7 @@ pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract Marketplace is ReentrancyGuard {
     address payable public immutable feeAccount;
@@ -68,14 +69,17 @@ contract Marketplace is ReentrancyGuard {
         uint256 _totalPrice = getTotalPrice(_itemId);
         Item storage item = items[_itemId];
         require(_itemId > 0 && _itemId <= itemCount, "item doesn't exist");
-        require(
-            msg.value >= _totalPrice,
-            "not enough ether to cover item price and market fee"
-        );
+//        require(
+//            msg.value >= _totalPrice,
+//            "not enough ether to cover item price and market fee"
+//        );
+
+        IERC20(tokenAddress).transferFrom(msg.sender, item.seller, item.price);
+        IERC20(tokenAddress).transferFrom(msg.sender, feeAccount, _totalPrice - item.price);
 
         require(!item.sold, "item already sold");
-        item.seller.transfer(item.price);
-        feeAccount.transfer(_totalPrice - item.price);
+//        item.seller.transfer(item.price);
+//        feeAccount.transfer(_totalPrice - item.price);
         item.sold = true;
         item.nft.transferFrom(address(this), msg.sender, item.tokenId);
 

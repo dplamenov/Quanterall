@@ -6,6 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { ethers } from 'ethers';
+import {Link} from "react-router-dom";
 
 function NFT({item}) {
   return <Card>
@@ -28,7 +29,9 @@ function NFT({item}) {
       </Typography>
     </CardContent>
     <CardActions>
-      <Button size="small">View</Button>
+      <Button size="small" variant="contained" to={'/nft/' + item.itemId} component={Link}>
+        View
+      </Button>
     </CardActions>
   </Card>;
 }

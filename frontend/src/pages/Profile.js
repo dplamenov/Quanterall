@@ -5,8 +5,8 @@ import {ethers} from 'ethers';
 
 function Profile() {
   const data = useSelector(state => state.web3);
-  const [balance, setBalance] = useState(0);
-  
+  const [balance, setBalance] = useState('');
+
   useEffect(() => {
     data.provider.getBalance(data.account).then((balance) => {
       const balanceInEth = ethers.utils.formatEther(balance)

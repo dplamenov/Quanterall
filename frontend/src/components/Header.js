@@ -16,8 +16,8 @@ function Header() {
 
   const ConnectedNavigation = () => {
     return <>
-      <Button color="inherit"><Link to="/profile">Marketplace</Link></Button>
-      <Button color="inherit"><Link to="/profile">Create</Link></Button>
+      <Button color="inherit"><Link to="/marketplace">Marketplace</Link></Button>
+      <Button color="inherit"><Link to="/create">Create</Link></Button>
       <Button color="inherit"><Link to="/profile">Profile</Link></Button>
     </>
   };

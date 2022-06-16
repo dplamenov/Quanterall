@@ -1,11 +1,27 @@
 import {Typography, Container, TextField, Button} from "@mui/material";
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import {useSelector} from "react-redux";
+import {ethers} from "ethers";
+import contracts from "../contracts/contracts.json";
+import TokenMarketplaceABI from "../contracts/TokenMarketplaceABI.json";
+import NFTTokenABI from "../contracts/NFTTokenABI.json";
 
 function NFTToken() {
+  const signer = useSelector(state => state.web3.signer);
+  const tokenMarketplace = new ethers.Contract(contracts.TokenMarketplace, TokenMarketplaceABI, signer);
+  const nftToken = new ethers.Contract(contracts.NFTToken, NFTTokenABI, signer);
+
   const [buyTokens, setBuyTokens] = useState(0);
   const [buyEth, setBuyEth] = useState(0);
   const [saleTokens, setSaleTokens] = useState(0);
   const [saleEth, setSaleEth] = useState(0);
+  const [liquidity, setLiquidity] = useState(0);
+
+  useEffect(() => {
+    nftToken.balanceOf(tokenMarketplace.address).then(balance => {
+      setLiquidity(ethers.utils.formatEther(balance));
+    });
+  });
 
   const setBuyTokensHandler = (e) => {
     setBuyTokens(e.target.value);
@@ -28,15 +44,17 @@ function NFTToken() {
   };
 
   const buyHandler = () => {
-
+    tokenMarketplace.buy({ value: ethers.utils.parseEther(buyEth.toString()) });
   };
 
-  const sellHandler = () => {
-
+  const sellHandler = async () => {
+    await nftToken.increaseAllowance(tokenMarketplace.address, ethers.utils.parseEther(saleTokens.toString()));
+    await tokenMarketplace.sell(ethers.utils.parseEther(saleTokens.toString()));
   }
 
   return <>
     <Typography component='h1' variant='h1'>NFT Token</Typography>
+    <p>Available tokens: {liquidity} NFTToken</p>
     <Container disableGutters maxWidth={false} sx={{display: 'flex'}}>
       <Container disableGutters maxWidth={false}>
         <Typography component='h2' variant='h2'>Buy</Typography>

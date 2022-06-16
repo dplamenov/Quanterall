@@ -30,6 +30,7 @@ function Header() {
     return <>
       <Button color="inherit"><Link to="/marketplace">Marketplace</Link></Button>
       <Button color="inherit"><Link to="/create">Create</Link></Button>
+      <Button color="inherit"><Link to="/nft-token">NFTToken</Link></Button>
       <Button color="inherit"><Link to="/profile">Profile</Link></Button>
     </>
   };

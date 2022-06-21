@@ -24,9 +24,9 @@ function NFT({item}) {
       <Typography variant="body2" color="text.secondary" component='p'>
         Description: {item.description}
       </Typography>
-      <Typography variant="body2" color="text.secondary" component='p'>
+      {item.forSale && <Typography variant="body2" color="text.secondary" component='p'>
         Price: {ethers.utils.formatEther(item.price)} NFTToken
-      </Typography>
+      </Typography>}
     </CardContent>
     <CardActions>
       <Button size="small" variant="contained" to={'/nft/' + item.itemId} component={Link}>

@@ -24,6 +24,7 @@ function Marketplace() {
       const response = await fetch(uri)
       const metadata = await response.json()
       const totalPrice = await marketplace.getTotalPrice(i.itemId)
+
       const item = {
         totalPrice,
         price: i.price,
@@ -32,7 +33,10 @@ function Marketplace() {
         description: metadata.description,
         image: metadata.image
       }
-      listedItems.push(item);
+
+      if(i.forSale) {
+        listedItems.push(item);
+      }
     }
 
     setListedItems(listedItems);

@@ -1,17 +1,27 @@
-import {Typography} from "@mui/material";
+import {Container, Typography} from "@mui/material";
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {ethers} from 'ethers';
 import NFTTokenABI from '../contracts/NFTABI.json';
 import contracts from "../contracts/contracts.json";
+import marketplaceABI from "../contracts/MarketplaceABI.json";
+import NFTABI from "../contracts/NFTABI.json";
+import NFT from "../components/NFT";
 
 function Profile() {
   const data = useSelector(state => state.web3);
   const signer = useSelector(state => state.web3.signer);
 
   const nftToken = new ethers.Contract(contracts.NFTToken, NFTTokenABI, signer);
+  const marketplace = new ethers.Contract(contracts.Marketplace, marketplaceABI, signer);
+  const nft = new ethers.Contract(contracts.NFT, NFTABI, signer);
+
   const [balance, setBalance] = useState('');
   const [tokenBalance, setTokenBalance] = useState('');
+  const [myNfts, setMyNfts] = useState({
+    forSale: [],
+    notForSale: []
+  });
 
   useEffect(() => {
     data.provider.getBalance(data.account).then((balance) => {
@@ -23,13 +33,53 @@ function Profile() {
       const parsedBalance = ethers.utils.formatEther(balance)
       setTokenBalance(parsedBalance);
     });
-  });
+
+    marketplace.itemsOwner(data.account).then(async (userNft) => {
+      const uri = await nft.tokenURI(userNft.tokenId)
+      const response = await fetch(uri)
+      const metadata = await response.json()
+      const totalPrice = await marketplace.getTotalPrice(userNft.itemId)
+
+      const item = {
+        totalPrice,
+        price: userNft.price,
+        itemId: userNft.itemId,
+        title: metadata.title,
+        description: metadata.description,
+        image: metadata.image
+      }
+
+      if(userNft.forSale) {
+        setMyNfts(nfts => ({...nfts, forSale: [...nfts.forSale, item]}))
+      } else {
+        setMyNfts(nfts => ({...nfts, notForSale: [...nfts.notForSale, item]}))
+      }
+
+    });
+  }, []);
 
   return <>
     <Typography variant='h1' component='h1'>Profile</Typography>
     <Typography component='p'>Address: {data.account}</Typography>
     <Typography component='p'>Ether balance: {balance} ETH</Typography>
     <Typography component='p'>NFT Token balance: {tokenBalance}</Typography>
+
+    <Typography component='h2' variant='h2'>My nfts</Typography>
+    <Typography component='h3' variant='h3'>Not for sale</Typography>
+
+    <Container sx={{display: 'flex', gap: '20px', flexWrap: 'wrap'}} maxWidth={false} disableGutters>
+      {myNfts.notForSale.map(nft => {
+        return <NFT item={nft} key={nft.itemId}/>
+      })}
+    </Container>
+    <hr />
+    <Typography component='h3' variant='h3'>For sale</Typography>
+
+    <Container sx={{display: 'flex', gap: '20px', flexWrap: 'wrap'}} maxWidth={false} disableGutters>
+      {myNfts.forSale.map(nft => {
+        return <NFT item={nft} key={nft.itemId}/>
+      })}
+    </Container>
   </>
 }
 

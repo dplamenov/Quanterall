@@ -36,7 +36,7 @@ function Create() {
     const id = await nft.tokenCount()
     await (await nft.setApprovalForAll(marketplace.address, true)).wait()
     const listingPrice = ethers.utils.parseEther(price.toString())
-    await (await marketplace.makeItem(nft.address, id, listingPrice)).wait();
+    await (await marketplace.mint(nft.address, id)).wait();
     navigate('/marketplace');
   };
 

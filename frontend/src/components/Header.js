@@ -4,6 +4,7 @@ import {ethers} from 'ethers';
 import {useDispatch, useSelector} from "react-redux";
 import {connect, loadContracts} from '../stores/web3';
 import contracts from "../contracts/contracts.json";
+import {useEffect} from "react";
 
 function Header() {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function Header() {
       dispatch(loadContracts({contracts: contractsMap}));
     });
   };
-
+  
   const ConnectedNavigation = () => {
     return <>
       <Button color="inherit"><Link to="/marketplace">Marketplace</Link></Button>

@@ -42,4 +42,8 @@ contract TokenMarketplace {
     function getBalanceOfTokens() public view returns(uint256) {
         return IERC20(token).balanceOf(address(this));
     }
+
+    function getK() public view returns(uint256) {
+        return address(this).balance * treasure;
+    }
 }

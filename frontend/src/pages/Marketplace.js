@@ -34,6 +34,7 @@ function Marketplace() {
         image: metadata.image
       }
 
+
       if(i.forSale) {
         listedItems.push(item);
       }

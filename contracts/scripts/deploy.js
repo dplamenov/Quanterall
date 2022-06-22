@@ -17,7 +17,7 @@ async function main() {
 
   // We get the contract to deploy
   const NFTToken = await hre.ethers.getContractFactory("NFTToken");
-  const nftToken = await NFTToken.deploy(ethers.BigNumber.from("10000000000000000000000"));
+  const nftToken = await NFTToken.deploy(ethers.BigNumber.from("10000000000000000000000000"));
 
   await nftToken.deployed();
 
@@ -42,9 +42,9 @@ async function main() {
 
   await tokenMarketplace.deployed();
 
-  await nftToken.increaseAllowance(tokenMarketplace.address, ethers.BigNumber.from("10000000000000000000000"));
+  await nftToken.increaseAllowance(tokenMarketplace.address, ethers.BigNumber.from("10000000000000000000000000"));
 
-  await tokenMarketplace.addLiquidity(ethers.BigNumber.from("100000000000000000000"), {value: ethers.utils.parseEther('10')});
+  await tokenMarketplace.addLiquidity(ethers.BigNumber.from("10000000000000000000000000"), {value: ethers.utils.parseEther('10')});
 
   // await nftToken.transfer(tokenMarketplace.address, ethers.BigNumber.from("50000000000000000000"));
 

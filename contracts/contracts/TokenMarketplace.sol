@@ -7,17 +7,24 @@ contract TokenMarketplace {
     address payable token;
     uint256 treasure;
 
-    constructor(address _token, uint256 _initialTokenCount) {
+    constructor(address _token) {
         token = payable(_token);
-        treasure = _initialTokenCount;
+    }
+
+    function addLiquidity(uint256 _tokens) public {
+        IERC20(token).transferFrom(msg.sender, address(this), _tokens);
     }
 
     function buy() public payable {
-        IERC20(token).transfer(msg.sender, msg.value * 1000);
+        uint k = address(this).balance * treasure;
+        treasure -= k / msg.value;
+        IERC20(token).transfer(msg.sender, k / msg.value);
     }
 
-    function sell(uint256 tokenToSale) public payable{
+    function sell(uint256 tokenToSale) public payable {
+        uint k = address(this).balance * treasure;
+
         IERC20(token).transferFrom(msg.sender, address(this), tokenToSale);
-        payable(msg.sender).transfer(tokenToSale / 1000);
+        payable(msg.sender).transfer(k / tokenToSale);
     }
 }

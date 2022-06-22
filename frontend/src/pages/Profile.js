@@ -23,6 +23,34 @@ function Profile() {
     notForSale: []
   });
 
+  const load = async () => {
+    const itemCount = await marketplace.itemCount();
+
+    for (let index = 1; index <= itemCount; index++) {
+      const i = await marketplace.items(index)
+      const uri = await nft.tokenURI(i.tokenId)
+      const response = await fetch(uri)
+      const metadata = await response.json()
+      const totalPrice = await marketplace.getTotalPrice(i.itemId)
+
+      const item = {
+        totalPrice,
+        price: i.price,
+        itemId: i.itemId,
+        title: metadata.title,
+        description: metadata.description,
+        image: metadata.image,
+        owner: i.owner
+      }
+
+      if(i.forSale) {
+        setMyNfts(nfts => ({...nfts, forSale: [...nfts.forSale, item]}))
+      } else {
+        setMyNfts(nfts => ({...nfts, notForSale: [...nfts.notForSale, item]}))
+      }
+    }
+  }
+
   useEffect(() => {
     data.provider.getBalance(data.account).then((balance) => {
       const balanceInEth = ethers.utils.formatEther(balance)
@@ -34,28 +62,38 @@ function Profile() {
       setTokenBalance(parsedBalance);
     });
 
-    marketplace.itemsOwner(data.account).then(async (userNft) => {
-      const uri = await nft.tokenURI(userNft.tokenId)
-      const response = await fetch(uri)
-      const metadata = await response.json()
-      const totalPrice = await marketplace.getTotalPrice(userNft.itemId)
 
-      const item = {
-        totalPrice,
-        price: userNft.price,
-        itemId: userNft.itemId,
-        title: metadata.title,
-        description: metadata.description,
-        image: metadata.image
-      }
 
-      if(userNft.forSale) {
-        setMyNfts(nfts => ({...nfts, forSale: [...nfts.forSale, item]}))
-      } else {
-        setMyNfts(nfts => ({...nfts, notForSale: [...nfts.notForSale, item]}))
-      }
+    // marketplace.allItems().then(async (userNfts) => {
+    //   userNfts.map(async (userNft) => {
+    {/*    const uri = await nft.tokenURI(userNft.tokenId)*/}
+    {/*    const response = await fetch(uri)*/}
+    {/*    const metadata = await response.json()*/}
+    {/*    const totalPrice = await marketplace.getTotalPrice(userNft.itemId)*/}
 
-    });
+    {/*    const item = {*/}
+    {/*      totalPrice,*/}
+    //       price: userNft.price,
+    //       itemId: userNft.itemId,
+    //       title: metadata.title,
+    {/*      description: metadata.description,*/}
+    //       image: metadata.image,
+    //       owner: userNft.owner
+    {/*    }*/}
+
+    {/*    console.log(userNft.forSale);*/}
+
+    //     if(userNft.forSale) {
+    //       setMyNfts(nfts => ({...nfts, forSale: [...nfts.forSale, item]}))
+    //     } else {
+    //       setMyNfts(nfts => ({...nfts, notForSale: [...nfts.notForSale, item]}))
+    //     }
+    //   })
+    //
+    //
+    // });
+
+    load();
   }, []);
 
   return <>

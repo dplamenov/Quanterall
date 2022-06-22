@@ -16,31 +16,48 @@ function NFTToken() {
   const [saleTokens, setSaleTokens] = useState(0);
   const [saleEth, setSaleEth] = useState(0);
   const [liquidity, setLiquidity] = useState(0);
+  const [k, setK] = useState(0);
+  const [contractBalance, setContractBalance] = useState(0);
+  const [contractTokenBalance, setContractTokenBalance] = useState(0);
 
   useEffect(() => {
     nftToken.balanceOf(tokenMarketplace.address).then(balance => {
       setLiquidity(ethers.utils.formatEther(balance));
     });
+
+    tokenMarketplace.getK().then(k => {
+      setK(k);
+    });
+
+    tokenMarketplace.getBalance().then(balance => {
+      setContractBalance(ethers.utils.formatEther(balance));
+    });
+
+    tokenMarketplace.getBalanceOfTokens().then(balance => {
+      setContractTokenBalance(ethers.utils.formatEther(balance));
+    });
   });
 
   const setBuyTokensHandler = (e) => {
     setBuyTokens(e.target.value);
-    setBuyEth(e.target.value / 1000);
+    const _k = (contractBalance * contractTokenBalance);
+    setBuyEth( _k / (contractTokenBalance - e.target.value) - contractBalance);
   }
 
   const setBuyEthHandler = (e) => {
     setBuyEth(e.target.value);
-    setBuyTokens(e.target.value * 1000);
+    const _k = (contractBalance * contractTokenBalance);
+    setBuyTokens(_k / (contractBalance - e.target.value) - contractTokenBalance);
   };
 
   const setSaleEthHandler = (e) => {
     setSaleEth(e.target.value);
-    setSaleTokens(e.target.value * 1000);
+    setSaleTokens(e.target.value * k);
   };
 
   const setSaleTokensHandler = (e) => {
     setSaleTokens(e.target.value);
-    setSaleEth(e.target.value / 1000);
+    setSaleEth(e.target.value / k);
   };
 
   const buyHandler = () => {
@@ -62,7 +79,7 @@ function NFTToken() {
           <TextField id="buy-tokens-input" label="Tokens" variant="outlined" value={buyTokens} onChange={setBuyTokensHandler}/>
           <TextField id="buy-eth-input" label="Eth" variant="outlined" value={buyEth} onChange={setBuyEthHandler}/>
         </Container>
-        <p>I will buy {buyTokens} tokens for {buyEth} ETH</p>
+        <p>I will buy {buyTokens} tokens for {buyEth} ETH {Number(k)}</p>
         <Button variant='contained' onClick={buyHandler}>Buy</Button>
       </Container>
       <Container disableGutters maxWidth={false}>

@@ -20,16 +20,19 @@ contract TokenMarketplace {
     }
 
     function buy() public payable {
-        uint256 k = address(this).balance * treasure;
-        treasure -= msg.value / k;
-        IERC20(token).transfer(msg.sender, msg.value / k);
+        uint256 k = (address(this).balance - msg.value) * treasure;
+        uint256 newReserve = k / address(this).balance;
+
+        IERC20(token).transfer(msg.sender, treasure - newReserve);
+        treasure = newReserve;
     }
 
     function sell(uint256 tokenToSale) public payable {
-        uint k = address(this).balance * treasure;
+        uint256 k = (address(this).balance - msg.value) * treasure;
+        uint256 newReserve = k / (treasure + tokenToSale);
 
         IERC20(token).transferFrom(msg.sender, address(this), tokenToSale);
-        payable(msg.sender).transfer(k / tokenToSale);
+        payable(msg.sender).transfer(address(this).balance - newReserve);
     }
 
     function getBalance() public view returns(uint256) {

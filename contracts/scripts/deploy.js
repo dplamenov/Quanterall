@@ -38,11 +38,15 @@ async function main() {
   console.log("Marketplace deployed to:", marketplace.address);
 
   const TokenMarketplace = await hre.ethers.getContractFactory("TokenMarketplace");
-  const tokenMarketplace = await TokenMarketplace.deploy(nftToken.address, ethers.BigNumber.from("50000000000000000000"));
+  const tokenMarketplace = await TokenMarketplace.deploy(nftToken.address);
 
   await tokenMarketplace.deployed();
 
-  await nftToken.transfer(tokenMarketplace.address, ethers.BigNumber.from("50000000000000000000"));
+  await nftToken.increaseAllowance(tokenMarketplace.address, ethers.BigNumber.from("10000000000000000000000"));
+
+  await tokenMarketplace.addLiquidity(ethers.BigNumber.from("100000000000000000000"), {value: ethers.utils.parseEther('10')});
+
+  // await nftToken.transfer(tokenMarketplace.address, ethers.BigNumber.from("50000000000000000000"));
 
   console.log("TokenMarketplace deployed to:", tokenMarketplace.address);
 

@@ -90,7 +90,7 @@ function NFTToken() {
           <TextField id="sell-tokens-input" label="Tokens" variant="outlined" value={saleTokens} onChange={setSaleTokensHandler}/>
           <TextField id="sell-eth-input" label="Eth" variant="outlined" value={saleEth} onChange={setSaleEthHandler}/>
         </Container>
-        <p>I will sell {saleTokens} tokens for {saleEth} ETH</p>
+        <p>I will sell {Number(saleTokens).toFixed(2)} tokens for {Number(saleEth).toFixed(10)} ETH</p>
         <Button variant='contained' onClick={sellHandler}>Sell</Button>
       </Container>
     </Container>

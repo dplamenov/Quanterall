@@ -54,7 +54,7 @@ function Header() {
         >
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          DeFI
+          NIPFI
         </Typography>
         <Button color="inherit">
           <Link to="/">Home</Link>

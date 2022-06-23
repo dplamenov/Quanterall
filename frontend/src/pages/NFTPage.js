@@ -49,7 +49,7 @@ function NFTPage() {
   };
 
   const saleHandler = async () => {
-    await marketplace.forSale(item.i.nft, ethers.utils.parseEther(price.toString()), 1);
+    await marketplace.forSale(item.i.nft, ethers.utils.parseEther(price.toString()), item.i.tokenId);
   }
 
   useEffect(() => {

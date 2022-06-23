@@ -52,12 +52,14 @@ function NFTToken() {
 
   const setSaleEthHandler = (e) => {
     setSaleEth(e.target.value);
-    setSaleTokens(e.target.value * k);
+    const _k = (contractBalance * contractTokenBalance);
+    setSaleTokens(_k / (contractBalance - e.target.value) - contractTokenBalance);
   };
 
   const setSaleTokensHandler = (e) => {
     setSaleTokens(e.target.value);
-    setSaleEth(e.target.value / k);
+    const _k = (contractBalance * contractTokenBalance);
+    setSaleEth(_k / (contractTokenBalance - e.target.value) - contractBalance);
   };
 
   const buyHandler = () => {
@@ -71,7 +73,7 @@ function NFTToken() {
 
   return <>
     <Typography component='h1' variant='h1'>NFT Token</Typography>
-    <p>Available tokens: {liquidity} NFTToken</p>
+    <p>Available tokens: {Number(liquidity).toFixed(2)} NFTToken</p>
     <Container disableGutters maxWidth={false} sx={{display: 'flex'}}>
       <Container disableGutters maxWidth={false}>
         <Typography component='h2' variant='h2'>Buy</Typography>
@@ -79,7 +81,7 @@ function NFTToken() {
           <TextField id="buy-tokens-input" label="Tokens" variant="outlined" value={buyTokens} onChange={setBuyTokensHandler}/>
           <TextField id="buy-eth-input" label="Eth" variant="outlined" value={buyEth} onChange={setBuyEthHandler}/>
         </Container>
-        <p>I will buy {buyTokens} tokens for {buyEth} ETH</p>
+        <p>I will buy {Number(buyTokens).toFixed(2)} tokens for {Number(buyEth).toFixed(10)} ETH</p>
         <Button variant='contained' onClick={buyHandler}>Buy</Button>
       </Container>
       <Container disableGutters maxWidth={false}>

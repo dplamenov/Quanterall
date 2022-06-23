@@ -17,7 +17,6 @@ function Create() {
   const nft = new ethers.Contract(contracts.NFT, NFTABI, signer);
 
   const [image, setImage] = useState();
-  const [price, setPrice] = useState('1');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const navigate = useNavigate();
@@ -29,7 +28,7 @@ function Create() {
 
   const handleCreate = async (e) => {
     e.preventDefault();
-    const result = await client.add(JSON.stringify({ image, price, title, description }));
+    const result = await client.add(JSON.stringify({ image, title, description }));
     const uri = `https://ipfs.infura.io/ipfs/${result.path}`;
 
     await (await nft.mint(uri)).wait()

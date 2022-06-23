@@ -28,6 +28,10 @@ function Profile() {
 
     for (let index = 1; index <= itemCount; index++) {
       const i = await marketplace.items(index)
+      if(i.owner.toLowerCase() !== data.account.toLowerCase()) {
+        continue;
+      }
+
       const uri = await nft.tokenURI(i.tokenId)
       const response = await fetch(uri)
       const metadata = await response.json()
@@ -61,37 +65,6 @@ function Profile() {
       const parsedBalance = ethers.utils.formatEther(balance)
       setTokenBalance(parsedBalance);
     });
-
-
-
-    // marketplace.allItems().then(async (userNfts) => {
-    //   userNfts.map(async (userNft) => {
-    {/*    const uri = await nft.tokenURI(userNft.tokenId)*/}
-    {/*    const response = await fetch(uri)*/}
-    {/*    const metadata = await response.json()*/}
-    {/*    const totalPrice = await marketplace.getTotalPrice(userNft.itemId)*/}
-
-    {/*    const item = {*/}
-    {/*      totalPrice,*/}
-    //       price: userNft.price,
-    //       itemId: userNft.itemId,
-    //       title: metadata.title,
-    {/*      description: metadata.description,*/}
-    //       image: metadata.image,
-    //       owner: userNft.owner
-    {/*    }*/}
-
-    {/*    console.log(userNft.forSale);*/}
-
-    //     if(userNft.forSale) {
-    //       setMyNfts(nfts => ({...nfts, forSale: [...nfts.forSale, item]}))
-    //     } else {
-    //       setMyNfts(nfts => ({...nfts, notForSale: [...nfts.notForSale, item]}))
-    //     }
-    //   })
-    //
-    //
-    // });
 
     load();
   }, []);

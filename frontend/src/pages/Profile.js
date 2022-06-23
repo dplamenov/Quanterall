@@ -99,8 +99,8 @@ function Profile() {
   return <>
     <Typography variant='h1' component='h1'>Profile</Typography>
     <Typography component='p'>Address: {data.account}</Typography>
-    <Typography component='p'>Ether balance: {balance} ETH</Typography>
-    <Typography component='p'>NFT Token balance: {tokenBalance}</Typography>
+    <Typography component='p'>Ether balance: {Number(balance).toFixed(2)} ETH</Typography>
+    <Typography component='p'>NFT Token balance: {Number(tokenBalance).toFixed(2)}</Typography>
 
     <Typography component='h2' variant='h2'>My nfts</Typography>
     <Typography component='h3' variant='h3'>Not for sale</Typography>

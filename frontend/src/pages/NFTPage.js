@@ -38,7 +38,8 @@ function NFTPage() {
       description: metadata.description,
       image: metadata.image,
       owner: i.owner.toLowerCase(),
-      i
+      i,
+      forSale: i.forSale
     }
   };
 
@@ -48,7 +49,7 @@ function NFTPage() {
   };
 
   const saleHandler = async () => {
-    await marketplace.forSale(item.i.nft, price, 1);
+    await marketplace.forSale(item.i.nft, ethers.utils.parseEther(price.toString()), 1);
   }
 
   useEffect(() => {
@@ -64,7 +65,8 @@ function NFTPage() {
     <Typography component='p' variant='p'>Description: {item?.description}</Typography>
     {item?.forSale &&
     <Typography component='p' variant='p'>Price: {ethers.utils.formatEther(item?.price || 0)} NFTToken</Typography>}
-    {item?.forSale && <Button variant='contained' onClick={buyHandler}>Buy</Button>}
+    {(item?.forSale && account !== item?.owner) && <Button variant='contained' onClick={buyHandler}>Buy</Button>}
+    {(item?.forSale && account === item?.owner) && <Button variant='contained'>Remove from marketplace</Button>}
     {(!item?.forSale && account === item?.owner) &&
     <>
       <Typography variant='h3' component='h3'>Put on marketplace</Typography>

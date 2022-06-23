@@ -21,7 +21,7 @@ contract Marketplace is ReentrancyGuard {
     }
 
     mapping(uint256 => Item) public items;
-    mapping(address => Item) public itemsOwner;
+    mapping(address => Item[]) public itemsOwner;
 
     event Mint(
         uint256 itemId,
@@ -42,7 +42,6 @@ contract Marketplace is ReentrancyGuard {
         address indexed nft,
         uint256 tokenId,
         uint256 price,
-//        address indexed seller,
         address indexed buyer
     );
 
@@ -68,20 +67,18 @@ contract Marketplace is ReentrancyGuard {
         );
 
         items[itemCount] = item;
-        itemsOwner[msg.sender] = item;
 
         emit Mint(itemCount, address(_nft), _tokenId, msg.sender);
     }
 
     function forSale(IERC721 _nft, uint256 _price, uint256 _tokenId) public {
-        _nft.transferFrom(msg.sender, address(this), _tokenId);
         Item memory item = items[_tokenId];
-
-        require(item.owner == msg.sender);
-
         item.forSale = true;
         item.price = _price;
 
+        items[_tokenId] = item;
+
+        _nft.transferFrom(msg.sender, address(this), _tokenId);
         emit Offered(item.itemId, address(_nft), _tokenId, _price);
     }
 
@@ -89,19 +86,16 @@ contract Marketplace is ReentrancyGuard {
         uint256 _totalPrice = getTotalPrice(_itemId);
         Item storage item = items[_itemId];
         require(_itemId > 0 && _itemId <= itemCount, "item doesn't exist");
-//        require(
-//            msg.value >= _totalPrice,
-//            "not enough ether to cover item price and market fee"
-//        );
 
         IERC20(tokenAddress).transferFrom(msg.sender, item.owner, item.price);
         IERC20(tokenAddress).transferFrom(msg.sender, feeAccount, _totalPrice - item.price);
 
-//        require(!item.sold, "item already sold");
-//        item.seller.transfer(item.price);
-//        feeAccount.transfer(_totalPrice - item.price);
-//        item.sold = true;
+        item.owner = payable(msg.sender);
+
         item.nft.transferFrom(address(this), msg.sender, item.tokenId);
+
+        items[_itemId] = item;
+        items[_itemId].forSale = false;
 
         emit Bought(
             _itemId,

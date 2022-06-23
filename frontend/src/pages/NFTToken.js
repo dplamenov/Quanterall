@@ -79,7 +79,7 @@ function NFTToken() {
           <TextField id="buy-tokens-input" label="Tokens" variant="outlined" value={buyTokens} onChange={setBuyTokensHandler}/>
           <TextField id="buy-eth-input" label="Eth" variant="outlined" value={buyEth} onChange={setBuyEthHandler}/>
         </Container>
-        <p>I will buy {buyTokens} tokens for {buyEth} ETH {Number(k)}</p>
+        <p>I will buy {buyTokens} tokens for {buyEth} ETH</p>
         <Button variant='contained' onClick={buyHandler}>Buy</Button>
       </Container>
       <Container disableGutters maxWidth={false}>

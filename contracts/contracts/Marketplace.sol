@@ -27,7 +27,8 @@ contract Marketplace is ReentrancyGuard {
         uint256 itemId,
         address indexed nft,
         uint256 tokenId,
-        address indexed owner
+        address indexed owner,
+        Item item
     );
 
     event Offered(
@@ -68,7 +69,7 @@ contract Marketplace is ReentrancyGuard {
 
         items[itemCount] = item;
 
-        emit Mint(itemCount, address(_nft), _tokenId, msg.sender);
+        emit Mint(itemCount, address(_nft), _tokenId, msg.sender, item);
     }
 
     function forSale(IERC721 _nft, uint256 _price, uint256 _tokenId) public {

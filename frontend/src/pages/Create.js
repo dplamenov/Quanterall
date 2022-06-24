@@ -36,7 +36,7 @@ function Create() {
     const id = await nft.tokenCount()
     await (await nft.setApprovalForAll(marketplace.address, true)).wait()
     await (await marketplace.mint(nft.address, id)).wait();
-    navigate('/marketplace');
+    navigate('/profile');
   };
 
   return (

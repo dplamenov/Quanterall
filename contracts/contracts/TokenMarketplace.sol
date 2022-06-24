@@ -15,6 +15,7 @@ contract TokenMarketplace {
     }
 
     function addLiquidity(uint256 _tokens) public payable{
+        require(msg.value >= 0.2 ether);
         IERC20(token).transferFrom(msg.sender, address(this), _tokens);
         treasure += _tokens;
     }

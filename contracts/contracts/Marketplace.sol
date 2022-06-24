@@ -92,7 +92,6 @@ contract Marketplace is ReentrancyGuard {
         IERC20(tokenAddress).transferFrom(msg.sender, feeAccount, _totalPrice - item.price);
 
         item.owner = payable(msg.sender);
-
         item.nft.transferFrom(address(this), msg.sender, item.tokenId);
 
         items[_itemId] = item;

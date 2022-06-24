@@ -6,3 +6,8 @@ r
 .idea/Quanterall.iml
 .idea/vcs.xml
 .vscode/settings.json
+frontend/src/contracts/contracts.json
+frontend/src/contracts/MarketplaceABI.json
+frontend/src/contracts/NFTABI.json
+frontend/src/contracts/NFTTokenABI.json
+frontend/src/contracts/TokenMarketplaceABI.json

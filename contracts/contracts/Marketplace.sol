@@ -102,7 +102,6 @@ contract Marketplace is ReentrancyGuard {
             address(item.nft),
             item.tokenId,
             item.price,
-//            item.seller,
             msg.sender
         );
     }

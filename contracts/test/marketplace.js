@@ -79,7 +79,7 @@ describe("Marketplace", function () {
     })
 
     it("purchase invalid item", async function () {
-      await expect(marketplace.connect(addr1).purchaseItem(1)).to.be.revertedWith("item doesn't exist'");
+      expect(marketplace.connect(addr1).purchaseItem(1)).to.be.revertedWith("item doesn't exist'");
     })
   })
 

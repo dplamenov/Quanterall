@@ -54,7 +54,7 @@ function Marketplace() {
         return <NFT key={k} item={item}/>
       })}
     </Container>
-    {listedItems.length === 0 && <Typography variant='h2' component='h2'>No items</Typography>}
+    {listedItems.length === 0 && <Typography variant='h2' component='h2'>No items for sale</Typography>}
   </>
 }
 

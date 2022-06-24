@@ -13,7 +13,6 @@ import {useNavigate} from "react-router-dom";
 function NFTPage() {
   const signer = useSelector(state => state.web3.signer);
   const account = useSelector(state => state.web3.account);
-  const data = useSelector(state => state.web3.account);
 
   const marketplace = new ethers.Contract(contracts.Marketplace, marketplaceABI, signer);
   const nftToken = new ethers.Contract(contracts.NFTToken, NFTTokenABI, signer);

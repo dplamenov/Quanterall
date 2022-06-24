@@ -20,10 +20,11 @@ jobs:
         
     steps:
     - uses: actions/checkout@v2
-    - working-directory: ./contracts
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn
+      working-directory: ./contracts
     - run: yarn test
+      working-directory: ./contracts

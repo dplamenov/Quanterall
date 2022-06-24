@@ -81,7 +81,7 @@ function NFTToken() {
           <TextField id="buy-tokens-input" label="Tokens" variant="outlined" value={buyTokens} onChange={setBuyTokensHandler}/>
           <TextField id="buy-eth-input" label="Eth" variant="outlined" value={buyEth} onChange={setBuyEthHandler}/>
         </Container>
-        <p>I will buy {Number(buyTokens).toFixed(2)} tokens for {Number(buyEth).toFixed(10)} ETH</p>
+        <p>You will buy {Number(buyTokens).toFixed(2)} tokens for {Number(buyEth).toFixed(10)} ETH</p>
         <Button variant='contained' onClick={buyHandler}>Buy</Button>
       </Container>
       <Container disableGutters maxWidth={false}>
@@ -90,7 +90,7 @@ function NFTToken() {
           <TextField id="sell-tokens-input" label="Tokens" variant="outlined" value={saleTokens} onChange={setSaleTokensHandler}/>
           <TextField id="sell-eth-input" label="Eth" variant="outlined" value={saleEth} onChange={setSaleEthHandler}/>
         </Container>
-        <p>I will sell {Number(saleTokens).toFixed(2)} tokens for {Number(saleEth).toFixed(10)} ETH</p>
+        <p>You will sell {Number(saleTokens).toFixed(2)} tokens for {Number(saleEth).toFixed(10)} ETH</p>
         <Button variant='contained' onClick={sellHandler}>Sell</Button>
       </Container>
     </Container>

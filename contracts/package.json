@@ -12,7 +12,7 @@
     "@openzeppelin/contracts": "^4.6.0",
     "solidity-coverage": "^0.7.21"
   },
-  "scripts: {
+  "scripts": {
     "test": "npx hardhat test"
   }
 }

@@ -41,7 +41,7 @@ function NFTToken() {
   const setBuyTokensHandler = (e) => {
     setBuyTokens(e.target.value);
     const _k = (contractBalance * contractTokenBalance);
-    setBuyEth( _k / (contractTokenBalance - e.target.value) - contractBalance);
+    setBuyEth( (_k / (contractTokenBalance - e.target.value) - contractBalance).toFixed(18));
   }
 
   const setBuyEthHandler = (e) => {
@@ -53,7 +53,7 @@ function NFTToken() {
   const setSaleEthHandler = (e) => {
     setSaleEth(e.target.value);
     const _k = (contractBalance * contractTokenBalance);
-    setSaleTokens(_k / (contractBalance - e.target.value) - contractTokenBalance);
+    setSaleTokens((_k / (contractBalance - e.target.value) - contractTokenBalance).toFixed(18));
   };
 
   const setSaleTokensHandler = (e) => {

@@ -5,6 +5,7 @@ import {ethers} from "ethers";
 import contracts from "../contracts/contracts.json";
 import TokenMarketplaceABI from "../contracts/TokenMarketplaceABI.json";
 import NFTTokenABI from "../contracts/NFTTokenABI.json";
+import {useNavigate} from "react-router-dom";
 
 function NFTToken() {
   const signer = useSelector(state => state.web3.signer);
@@ -16,17 +17,14 @@ function NFTToken() {
   const [saleTokens, setSaleTokens] = useState(0);
   const [saleEth, setSaleEth] = useState(0);
   const [liquidity, setLiquidity] = useState(0);
-  const [k, setK] = useState(0);
   const [contractBalance, setContractBalance] = useState(0);
   const [contractTokenBalance, setContractTokenBalance] = useState(0);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     nftToken.balanceOf(tokenMarketplace.address).then(balance => {
       setLiquidity(ethers.utils.formatEther(balance));
-    });
-
-    tokenMarketplace.getK().then(k => {
-      setK(k);
     });
 
     tokenMarketplace.getBalance().then(balance => {
@@ -40,35 +38,37 @@ function NFTToken() {
 
   const setBuyTokensHandler = (e) => {
     setBuyTokens(e.target.value);
-    const _k = (contractBalance * contractTokenBalance);
-    setBuyEth( (_k / (contractTokenBalance - e.target.value) - contractBalance).toFixed(18));
+    const k = (contractBalance * contractTokenBalance);
+    setBuyEth((k / (contractTokenBalance - e.target.value) - contractBalance).toFixed(18));
   }
 
   const setBuyEthHandler = (e) => {
     setBuyEth(e.target.value);
-    const _k = (contractBalance * contractTokenBalance);
-    setBuyTokens(_k / (contractBalance - e.target.value) - contractTokenBalance);
+    const k = (contractBalance * contractTokenBalance);
+    setBuyTokens(k / (contractBalance - e.target.value) - contractTokenBalance);
   };
 
   const setSaleEthHandler = (e) => {
     setSaleEth(e.target.value);
-    const _k = (contractBalance * contractTokenBalance);
-    setSaleTokens((_k / (contractBalance - e.target.value) - contractTokenBalance).toFixed(18));
+    const k = (contractBalance * contractTokenBalance);
+    setSaleTokens((k / (contractBalance - e.target.value) - contractTokenBalance).toFixed(18));
   };
 
   const setSaleTokensHandler = (e) => {
     setSaleTokens(e.target.value);
-    const _k = (contractBalance * contractTokenBalance);
-    setSaleEth(_k / (contractTokenBalance - e.target.value) - contractBalance);
+    const k = (contractBalance * contractTokenBalance);
+    setSaleEth(k / (contractTokenBalance - e.target.value) - contractBalance);
   };
 
-  const buyHandler = () => {
-    tokenMarketplace.buy({ value: ethers.utils.parseEther(buyEth.toString()) });
+  const buyHandler = async () => {
+    await tokenMarketplace.buy({ value: ethers.utils.parseEther(buyEth.toString()) });
+    navigate('/profile');
   };
 
   const sellHandler = async () => {
     await nftToken.increaseAllowance(tokenMarketplace.address, ethers.utils.parseEther(saleTokens.toString()));
     await tokenMarketplace.sell(ethers.utils.parseEther(saleTokens.toString()));
+    navigate('/profile');
   }
 
   return <>

@@ -6,7 +6,8 @@ import {useSelector} from "react-redux";
 import contracts from "../contracts/contracts.json";
 import marketplaceABI from "../contracts/MarketplaceABI.json";
 import NFTABI from "../contracts/NFTABI.json";
-import {Container, Typography, Input, TextField, Button} from "@mui/material";
+import {Container, Typography, Input, TextField, Button, FormLabel} from "@mui/material";
+import NFT from "../components/NFT";
 
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
@@ -41,13 +42,22 @@ function Create() {
   return (
     <>
       <Typography component='h1' variant='h1'>Create</Typography>
-      <Container maxWidth={false} disableGutters sx={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
-        <Typography component='h5' variant='h5'>Upload file for NFT</Typography>
+      <Container maxWidth={false} disableGutters sx={{display: 'flex', gap: '30px'}}>
+        <Container maxWidth={false} disableGutters sx={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
+          <Typography component='h5' variant='h5'>Upload file for NFT</Typography>
 
-        <Input type="file" onChange={uploadFileHandler}/>
-        <TextField id="title-input" label="Title" variant="outlined" onChange={e => setTitle(e.target.value)} value={title}/>
-        <TextField id="description-input" label="Description" variant="outlined" onChange={e => setDescription(e.target.value)} value={description}/>
-        <Button onClick={handleCreate}>Create</Button>
+          <label className="custom-file-upload">
+            <Input type="file" id='file-upload' onChange={uploadFileHandler} sx={{display:'none'}}/>
+            <p style={{color: '#1976d2', cursor: 'pointer'}}>Upload file</p>
+          </label>
+          <TextField id="title-input" label="Title" variant="outlined" onChange={e => setTitle(e.target.value)} value={title}/>
+          <TextField id="description-input" label="Description" variant="outlined" rows={5} multiline onChange={e => setDescription(e.target.value)} value={description}/>
+          <Button onClick={handleCreate} variant='contained' sx={{alignSelf: 'flex-start'}}>Create</Button>
+        </Container>
+        <Container maxWidth={false} disableGutters sx={{width: '30%'}}>
+          <Typography component='h3' variant='h3'>Preview:</Typography>
+          <NFT item={{title, description, image}}/>
+        </Container>
       </Container>
     </>
   )

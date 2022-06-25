@@ -23,5 +23,5 @@ jobs:
         with:
     # Command to pass to hardhart
     # Path to another directory in the repository, where hardhat command will be issued from.
-Useful in those cases where hardhat config is not in git repository root.
+    # Useful in those cases where hardhat config is not in git repository root.
           working_dir: ./contracts

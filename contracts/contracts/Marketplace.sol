@@ -113,7 +113,7 @@ contract Marketplace is ReentrancyGuard {
 
         items[_tokenId] = item;
 
-        _nft.transferFrom(msg.sender, address(this), _tokenId);
+        _nft.transfer(msg.sender, _tokenId);
     }
 
     function getTotalPrice(uint256 _itemId) public view returns (uint256) {

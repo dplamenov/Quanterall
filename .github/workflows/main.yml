@@ -28,5 +28,5 @@ jobs:
       - name: Hardhat
         uses: amine7777/hardhat-action@v1
         with:
-          command: test
+          command: --help
           working_dir: ./contracts

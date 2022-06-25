@@ -106,6 +106,16 @@ contract Marketplace is ReentrancyGuard {
         );
     }
 
+    function removeFromMarketplace(IERC721 _nft, uint256 _tokenId) {
+        Item memory item = items[_tokenId];
+        item.forSale = false;
+        item.price = 0;
+
+        items[_tokenId] = item;
+
+        _nft.transferFrom(msg.sender, address(this), _tokenId);
+    }
+
     function getTotalPrice(uint256 _itemId) public view returns (uint256) {
         return ((items[_itemId].price * (100 + feePercent)) / 100);
     }

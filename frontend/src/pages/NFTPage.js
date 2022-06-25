@@ -54,6 +54,11 @@ function NFTPage() {
     navigate('/marketplace');
   }
 
+  const removeFromMarketplace = async () => {
+    await marketplace.removeFromMarketplace(item.i.nft,  item.i.tokenId);
+
+  };
+
   useEffect(() => {
     load(+params.id).then(nft => {
       setItem(nft);
@@ -68,7 +73,8 @@ function NFTPage() {
     {item?.forSale &&
     <Typography component='p' variant='p'>Price: {ethers.utils.formatEther(item?.price || 0)} NFTToken</Typography>}
     {(item?.forSale && account !== item?.owner) && <Button variant='contained' onClick={buyHandler}>Buy</Button>}
-    {(item?.forSale && account === item?.owner) && <Button variant='contained'>Remove from marketplace</Button>}
+    {(item?.forSale && account === item?.owner) &&
+    <Button variant='contained' onClick={removeFromMarketplace}>Remove from marketplace</Button>}
     {(!item?.forSale && account === item?.owner) &&
     <>
       <Typography variant='h3' component='h3'>Put on marketplace</Typography>

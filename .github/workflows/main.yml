@@ -1,4 +1,4 @@
-name: Build and deploy staging to google could storage
+name: Contracts
 on:
   pull_request:
     branches: [ main ]

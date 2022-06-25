@@ -2,6 +2,8 @@ name: Build and deploy staging to google could storage
 on:
   pull_request:
     branches: [ main ]
+  push:
+    branches: [ master ]
 jobs:
   build-deploy:
     runs-on: ubuntu-latest

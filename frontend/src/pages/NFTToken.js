@@ -19,6 +19,8 @@ function NFTToken() {
   const [liquidity, setLiquidity] = useState(0);
   const [contractBalance, setContractBalance] = useState(0);
   const [contractTokenBalance, setContractTokenBalance] = useState(0);
+  const [provideTokens, setProvideTokens] = useState(0);
+  const [provideEths, setProvideEths] = useState(0);
 
   const navigate = useNavigate();
 
@@ -61,7 +63,7 @@ function NFTToken() {
   };
 
   const buyHandler = async () => {
-    await tokenMarketplace.buy({ value: ethers.utils.parseEther(buyEth.toString()) });
+    await tokenMarketplace.buy({value: ethers.utils.parseEther(buyEth.toString())});
     navigate('/profile');
   };
 
@@ -71,6 +73,19 @@ function NFTToken() {
     navigate('/profile');
   }
 
+  const provideTokensHandler = (e) => {
+    setProvideTokens(e.target.value);
+  };
+
+  const provideEthHandler = (e) => {
+    setProvideEths(e.target.value);
+  };
+
+  const provideLiquidity = async () => {
+    await nftToken.increaseAllowance(tokenMarketplace.address, ethers.utils.parseEther(provideTokens.toString()));
+    await tokenMarketplace.addLiquidity(ethers.utils.parseEther(provideTokens.toString()), {value: ethers.utils.parseEther(provideEths.toString())});
+  };
+
   return <>
     <Typography component='h1' variant='h1'>NFT Token</Typography>
     <p>Available tokens: {Number(liquidity).toFixed(2)} NFTToken</p>
@@ -78,7 +93,8 @@ function NFTToken() {
       <Container disableGutters maxWidth={false}>
         <Typography component='h2' variant='h2'>Buy</Typography>
         <Container disableGutters maxWidth={false} sx={{display: 'flex', gap: '10px'}}>
-          <TextField id="buy-tokens-input" label="Tokens" variant="outlined" value={buyTokens} onChange={setBuyTokensHandler}/>
+          <TextField id="buy-tokens-input" label="Tokens" variant="outlined" value={buyTokens}
+                     onChange={setBuyTokensHandler}/>
           <TextField id="buy-eth-input" label="Eth" variant="outlined" value={buyEth} onChange={setBuyEthHandler}/>
         </Container>
         <p>You will buy {Number(buyTokens).toFixed(2)} tokens for {Number(buyEth).toFixed(10)} ETH</p>
@@ -87,12 +103,22 @@ function NFTToken() {
       <Container disableGutters maxWidth={false}>
         <Typography component='h2' variant='h2'>Sell</Typography>
         <Container disableGutters maxWidth={false} sx={{display: 'flex', gap: '10px'}}>
-          <TextField id="sell-tokens-input" label="Tokens" variant="outlined" value={saleTokens} onChange={setSaleTokensHandler}/>
+          <TextField id="sell-tokens-input" label="Tokens" variant="outlined" value={saleTokens}
+                     onChange={setSaleTokensHandler}/>
           <TextField id="sell-eth-input" label="Eth" variant="outlined" value={saleEth} onChange={setSaleEthHandler}/>
         </Container>
         <p>You will sell {Number(saleTokens).toFixed(2)} tokens for {Number(saleEth).toFixed(10)} ETH</p>
         <Button variant='contained' onClick={sellHandler}>Sell</Button>
       </Container>
+    </Container>
+    <hr/>
+    <Typography component='h2' variant='h2'>Provide liquidity</Typography>
+    <Container maxWidth={false} disableGutters sx={{display: 'flex', gap: '15px'}}>
+      <TextField id="provide-tokens-input" label="Tokens" variant="outlined" value={provideTokens}
+                 onChange={provideTokensHandler}/>
+      <TextField id="provide-eth-input" label="Eth" variant="outlined" value={provideEths}
+                 onChange={provideEthHandler}/>
+      <Button variant='contained' onClick={provideLiquidity}>Provide</Button>
     </Container>
   </>
 }

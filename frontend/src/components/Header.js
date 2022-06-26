@@ -4,7 +4,6 @@ import {ethers} from 'ethers';
 import {useDispatch, useSelector} from "react-redux";
 import {connect, loadContracts} from '../stores/web3';
 import contracts from "../contracts/contracts.json";
-import {useEffect} from "react";
 
 function Header() {
   const dispatch = useDispatch();

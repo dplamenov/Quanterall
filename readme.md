@@ -1,4 +1,4 @@
-# [NipFI - decentralized finance application](http://nft.sharkdev.eu)
+# [NipFI - decentralized finance application](http://nipfi.sharkdev.eu)
 
 decentralized finance application deployed on ropsten network
 

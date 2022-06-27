@@ -1,5 +1,5 @@
-import { AppBar, Box, Toolbar, Typography, Button, IconButton } from '@mui/material';
-import { Link } from "react-router-dom";
+import {AppBar, Box, Toolbar, Typography, Button, IconButton} from '@mui/material';
+import {Link} from "react-router-dom";
 import {ethers} from 'ethers';
 import {useDispatch, useSelector} from "react-redux";
 import {connect} from '../stores/web3';
@@ -37,16 +37,16 @@ function Header() {
           edge="start"
           color="inherit"
           aria-label="menu"
-          sx={{ mr: 2 }}
+          sx={{mr: 2}}
         >
         </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
           NIPFI
         </Typography>
         <Button color="inherit">
           <Link to="/">Home</Link>
         </Button>
-        {data.account ? <ConnectedNavigation />:  <GuestNavigation />}
+        {data.account ? <ConnectedNavigation/> : <GuestNavigation/>}
       </Toolbar>
     </AppBar>
   </Box>

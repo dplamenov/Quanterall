@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { ethers } from 'ethers';
+import {ethers} from 'ethers';
 import {Link} from "react-router-dom";
 
 function NFT({item}) {

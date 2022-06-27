@@ -28,7 +28,7 @@ function Profile() {
 
     for (let index = 1; index <= itemCount; index++) {
       const i = await marketplace.items(index)
-      if(i.owner.toLowerCase() !== data.account.toLowerCase()) {
+      if (i.owner.toLowerCase() !== data.account.toLowerCase()) {
         continue;
       }
 
@@ -47,7 +47,7 @@ function Profile() {
         owner: i.owner
       }
 
-      if(i.forSale) {
+      if (i.forSale) {
         setMyNfts(nfts => ({...nfts, forSale: [...nfts.forSale, item]}))
       } else {
         setMyNfts(nfts => ({...nfts, notForSale: [...nfts.notForSale, item]}))
@@ -83,7 +83,7 @@ function Profile() {
         return <NFT item={nft} key={nft.itemId}/>
       })}
     </Container>
-    <hr />
+    <hr/>
     <Typography component='h3' variant='h3'>For sale</Typography>
 
     <Container sx={{display: 'flex', gap: '20px', flexWrap: 'wrap'}} maxWidth={false} disableGutters>

@@ -45,7 +45,7 @@ function Marketplace() {
 
   useEffect(() => {
     loadListedItems()
-  }, [])
+  }, [loadListedItems])
 
   return <>
     <Typography variant='h1' component='h1'>Marketplace</Typography>

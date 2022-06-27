@@ -21,7 +21,7 @@ const PrivateRoute = ({element}) => {
     connectCb().then(_ => {
       setIsLoaded(true);
     });
-  }, []);
+  }, [setIsLoaded]);
 
   return isLoaded ? (account ? element : <Navigate to="/"/>) : <h1>loading...</h1>;
 }

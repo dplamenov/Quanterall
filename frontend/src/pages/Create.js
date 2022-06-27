@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { create as ipfsHttpClient } from 'ipfs-http-client'
-import { ethers } from 'ethers';
-import { useNavigate } from "react-router-dom";
+import {useState} from 'react';
+import {create as ipfsHttpClient} from 'ipfs-http-client'
+import {ethers} from 'ethers';
+import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import contracts from "../contracts/contracts.json";
 import marketplaceABI from "../contracts/MarketplaceABI.json";
@@ -29,7 +29,7 @@ function Create() {
 
   const handleCreate = async (e) => {
     e.preventDefault();
-    const result = await client.add(JSON.stringify({ image, title, description }));
+    const result = await client.add(JSON.stringify({image, title, description}));
     const uri = `https://ipfs.infura.io/ipfs/${result.path}`;
 
     await (await nft.mint(uri)).wait()
@@ -47,11 +47,13 @@ function Create() {
           <Typography component='h5' variant='h5'>Upload file for NFT</Typography>
 
           <label className="custom-file-upload">
-            <Input type="file" id='file-upload' onChange={uploadFileHandler} sx={{display:'none'}}/>
+            <Input type="file" id='file-upload' onChange={uploadFileHandler} sx={{display: 'none'}}/>
             <p style={{color: '#1976d2', cursor: 'pointer'}}>Upload file</p>
           </label>
-          <TextField id="title-input" label="Title" variant="outlined" onChange={e => setTitle(e.target.value)} value={title}/>
-          <TextField id="description-input" label="Description" variant="outlined" rows={5} multiline onChange={e => setDescription(e.target.value)} value={description}/>
+          <TextField id="title-input" label="Title" variant="outlined" onChange={e => setTitle(e.target.value)}
+                     value={title}/>
+          <TextField id="description-input" label="Description" variant="outlined" rows={5} multiline
+                     onChange={e => setDescription(e.target.value)} value={description}/>
           <Button onClick={handleCreate} variant='contained' sx={{alignSelf: 'flex-start'}}>Create</Button>
         </Container>
         <Container maxWidth={false} disableGutters sx={{width: '30%'}}>

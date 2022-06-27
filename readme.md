@@ -1,6 +1,6 @@
 # [NipFI - decentralized finance application](http://nipfi.sharkdev.eu)
 
-decentralized finance application deployed on ropsten network
+decentralized finance application deployed on **ropsten** network
 
 ## Ideas behind NipFI
 1. 100% decentralized application

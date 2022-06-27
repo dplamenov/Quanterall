@@ -18,7 +18,7 @@ function App() {
         <Header/>
         <Container>
           <Routes>
-            <Route exact path="/" element={<HomePage/>}/>
+            <Route exact path="/" element={<PrivateRoute element={<HomePage/>}/>}/>
             <Route path='/profile' element={<PrivateRoute element={<Profile/>}/>}/>
             <Route path='/create' element={<PrivateRoute element={<Create/>}/>}/>
             <Route path='/marketplace' element={<PrivateRoute element={<Marketplace/>}/>}/>

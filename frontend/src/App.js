@@ -15,15 +15,15 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Header />
+        <Header/>
         <Container>
           <Routes>
-            <Route exact path="/" element={<HomePage />} />
-            <Route path='/profile' element={<PrivateRoute element={<Profile />}/>} />
-            <Route path='/create' element={<PrivateRoute element={<Create />}/>} />
-            <Route path='/marketplace' element={<PrivateRoute element={<Marketplace />}/>} />
-            <Route path='/nft-token' element={<PrivateRoute element={<NFTToken />}/>} />
-            <Route path='/nft/:id' element={<PrivateRoute element={<NFTPage />}/>} />
+            <Route exact path="/" element={<HomePage/>}/>
+            <Route path='/profile' element={<PrivateRoute element={<Profile/>}/>}/>
+            <Route path='/create' element={<PrivateRoute element={<Create/>}/>}/>
+            <Route path='/marketplace' element={<PrivateRoute element={<Marketplace/>}/>}/>
+            <Route path='/nft-token' element={<PrivateRoute element={<NFTToken/>}/>}/>
+            <Route path='/nft/:id' element={<PrivateRoute element={<NFTPage/>}/>}/>
           </Routes>
         </Container>
       </BrowserRouter>

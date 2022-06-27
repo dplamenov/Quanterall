@@ -35,7 +35,7 @@ function Marketplace() {
       }
 
 
-      if(i.forSale) {
+      if (i.forSale) {
         listedItems.push(item);
       }
     }

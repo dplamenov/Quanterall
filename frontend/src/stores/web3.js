@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit'
 
 export const web3Slice = createSlice({
   name: 'web3',
@@ -17,4 +17,4 @@ export const web3Slice = createSlice({
   }
 })
 
-export const { connect, loadContracts } = web3Slice.actions
+export const {connect, loadContracts} = web3Slice.actions

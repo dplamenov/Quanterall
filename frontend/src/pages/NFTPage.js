@@ -55,7 +55,7 @@ function NFTPage() {
   }
 
   const removeFromMarketplace = async () => {
-    await marketplace.removeFromMarketplace(item.i.nft,  item.i.tokenId);
+    await marketplace.removeFromMarketplace(item.i.nft, item.i.tokenId);
 
   };
 

@@ -67,7 +67,7 @@ function Profile() {
     });
 
     load();
-  }, []);
+  }, [data.account, data.provider, load, nftToken]);
 
   return <>
     <Typography variant='h1' component='h1'>Profile</Typography>

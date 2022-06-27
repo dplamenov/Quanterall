@@ -63,7 +63,7 @@ function NFTPage() {
     load(+params.id).then(nft => {
       setItem(nft);
     });
-  }, []);
+  }, [load, params.id]);
 
   return <>
     <Typography component='h1' variant='h1'>NFT:</Typography>

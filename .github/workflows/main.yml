@@ -13,10 +13,10 @@ on:
 
 jobs:
   web-deploy:
-    name: 🎉 Deploy
+    name: Frontend deploy
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest code
+    - name: Get latest version of code
       uses: actions/checkout@v2
 
     - name: Use Node.js 16
@@ -24,13 +24,13 @@ jobs:
       with:
         node-version: '16'
       
-    - name: 🔨 Build Project
+    - name: Build
       run: |
         yarn
         yarn build
       working-directory: ./frontend
     
-    - name: 📂 Upload files
+    - name: Deploy to server
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
         server: ftp.sharkdev.eu

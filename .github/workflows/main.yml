@@ -39,4 +39,4 @@ jobs:
         username: sharkdev
         password: ${{ secrets.password }}
         local-dir: ./frontend/build/
-        server-dir: ./nft.sharkdev.eu
+        server-dir: ./

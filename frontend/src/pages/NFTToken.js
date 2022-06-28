@@ -36,46 +36,54 @@ function NFTToken() {
     tokenMarketplace.getBalanceOfTokens().then(balance => {
       setContractTokenBalance(ethers.utils.formatEther(balance));
     });
-  });
+  }, []);
 
   const setBuyTokensHandler = (e) => {
-    if(+e.target.value >= contractTokenBalance) {
-      alert('no balance in nft token contract');
-      return;
+    let value = +e.target.value;
+
+    if (value >= contractTokenBalance) {
+      value = contractTokenBalance - 0.001;
     }
-    setBuyTokens(e.target.value);
+
     const k = (contractBalance * contractTokenBalance);
-    setBuyEth((k / (contractTokenBalance - e.target.value) - contractBalance).toFixed(18));
+    setBuyTokens(value);
+    setBuyEth((k / (contractTokenBalance - value) - contractBalance).toFixed(18));
   }
 
   const setBuyEthHandler = (e) => {
-    if(+e.target.value >= contractBalance) {
-      alert('no balance in nft token contract');
-      return;
+    let value = +e.target.value;
+
+    if (value >= contractBalance) {
+      value = contractBalance - 0.001;
     }
-    setBuyEth(e.target.value);
+
     const k = (contractBalance * contractTokenBalance);
-    setBuyTokens(k / (contractBalance - e.target.value) - contractTokenBalance);
+    setBuyEth(value);
+    setBuyTokens(k / (contractBalance - value) - contractTokenBalance);
   };
 
   const setSaleEthHandler = (e) => {
-    if(+e.target.value >= contractBalance) {
-      alert('no balance in nft token contract');
-      return;
+    let value = +e.target.value;
+
+    if (value >= contractBalance) {
+      value = contractBalance - 0.001;
     }
-    setSaleEth(e.target.value);
+
     const k = (contractBalance * contractTokenBalance);
-    setSaleTokens((k / (contractBalance - e.target.value) - contractTokenBalance).toFixed(18));
+    setSaleEth(value);
+    setSaleTokens((k / (contractBalance - value) - contractTokenBalance).toFixed(18));
   };
 
   const setSaleTokensHandler = (e) => {
-    if(+e.target.value >= contractTokenBalance) {
-      alert('no balance in nft token contract');
-      return;
+    let value = +e.target.value;
+
+    if (value >= contractTokenBalance) {
+      value = contractTokenBalance - 0.001;
     }
-    setSaleTokens(e.target.value);
+
     const k = (contractBalance * contractTokenBalance);
-    setSaleEth(k / (contractTokenBalance - e.target.value) - contractBalance);
+    setSaleTokens(value);
+    setSaleEth(k / (contractTokenBalance - value) - contractBalance);
   };
 
   const buyHandler = async () => {

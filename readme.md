@@ -13,6 +13,7 @@ decentralized finance application deployed on **ropsten** network
 ## Application
 1. NFT Minting
 2. NFT Marketplace
+4. Trade NFT Token
 3. Profile
 
 ## NFT Token

@@ -71,25 +71,40 @@ function Profile() {
 
   return <>
     <Typography variant='h1' component='h1'>Profile</Typography>
-    <Typography component='p'>Address: {data.account}</Typography>
-    <Typography component='p'>Ether balance: {Number(balance).toFixed(2)} ETH</Typography>
-    <Typography component='p'>NFT Token balance: {Number(tokenBalance).toFixed(2)}</Typography>
 
-    <Typography component='h2' variant='h2'>My nfts</Typography>
-    <Typography component='h3' variant='h3'>Not for sale</Typography>
+    <Typography component='h3' variant='h3'>Info</Typography>
+    <table style={{width: '100%', textAlign: 'center'}}>
+      <tr>
+        <th>Address</th>
+        <th>Ether balance</th>
+        <th>NFTToken balance</th>
+      </tr>
+      <tr>
+        <td>{data.account}</td>
+        <td>{Number(balance).toFixed(2)} ETH</td>
+        <td>{Number(tokenBalance).toFixed(2)}</td>
+      </tr>
+    </table>
 
-    <Container sx={{display: 'flex', gap: '20px', flexWrap: 'wrap'}} maxWidth={false} disableGutters>
-      {myNfts.notForSale.map(nft => {
-        return <NFT item={nft} key={nft.itemId}/>
-      })}
-    </Container>
-    <hr/>
-    <Typography component='h3' variant='h3'>For sale</Typography>
+    <Typography component='h3' variant='h3'>My NFTs</Typography>
+    <Container disableGutters maxWidth={false} sx={{display: 'flex'}}>
+      <Container disableGutters maxWidth={false}>
+        <Typography component='h4' variant='h4'>Not for sale</Typography>
+        <Container sx={{display: 'flex', gap: '20px', flexWrap: 'wrap'}} maxWidth={false} disableGutters>
+          {myNfts.notForSale.map(nft => {
+            return <NFT item={nft} key={nft.itemId}/>
+          })}
+        </Container>
+      </Container>
 
-    <Container sx={{display: 'flex', gap: '20px', flexWrap: 'wrap'}} maxWidth={false} disableGutters>
-      {myNfts.forSale.map(nft => {
-        return <NFT item={nft} key={nft.itemId}/>
-      })}
+      <Container disableGutters maxWidth={false}>
+        <Typography component='h5' variant='h4'>For sale</Typography>
+        <Container sx={{display: 'flex', gap: '20px', flexWrap: 'wrap'}} maxWidth={false} disableGutters>
+          {myNfts.forSale.map(nft => {
+            return <NFT item={nft} key={nft.itemId}/>
+          })}
+        </Container>
+      </Container>
     </Container>
   </>
 }

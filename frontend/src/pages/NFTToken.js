@@ -39,24 +39,40 @@ function NFTToken() {
   });
 
   const setBuyTokensHandler = (e) => {
+    if(+e.target.value >= contractTokenBalance) {
+      alert('no balance in nft token contract');
+      return;
+    }
     setBuyTokens(e.target.value);
     const k = (contractBalance * contractTokenBalance);
     setBuyEth((k / (contractTokenBalance - e.target.value) - contractBalance).toFixed(18));
   }
 
   const setBuyEthHandler = (e) => {
+    if(+e.target.value >= contractBalance) {
+      alert('no balance in nft token contract');
+      return;
+    }
     setBuyEth(e.target.value);
     const k = (contractBalance * contractTokenBalance);
     setBuyTokens(k / (contractBalance - e.target.value) - contractTokenBalance);
   };
 
   const setSaleEthHandler = (e) => {
+    if(+e.target.value >= contractBalance) {
+      alert('no balance in nft token contract');
+      return;
+    }
     setSaleEth(e.target.value);
     const k = (contractBalance * contractTokenBalance);
     setSaleTokens((k / (contractBalance - e.target.value) - contractTokenBalance).toFixed(18));
   };
 
   const setSaleTokensHandler = (e) => {
+    if(+e.target.value >= contractTokenBalance) {
+      alert('no balance in nft token contract');
+      return;
+    }
     setSaleTokens(e.target.value);
     const k = (contractBalance * contractTokenBalance);
     setSaleEth(k / (contractTokenBalance - e.target.value) - contractBalance);

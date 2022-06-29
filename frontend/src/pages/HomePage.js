@@ -1,4 +1,4 @@
-import {Typography} from "@mui/material";
+import {Container, Typography} from "@mui/material";
 import {useSelector} from "react-redux";
 import {ethers} from "ethers";
 import contracts from "../contracts/contracts.json";
@@ -84,9 +84,11 @@ function HomePage() {
     </Typography>
     <Typography variant='h4' component='h2'>Latest NFTs in marketplace</Typography>
     {listedItems.length === 0 && <Typography component='p' variant='p'>No NFTs in marketplace</Typography>}
-    {listedItems.map((item, k) => {
-      return <NFT key={k} item={item}/>
-    })}
+    <Container disableGutters maxWidth={false} sx={{display: 'flex', flexDirection: 'row'}}>
+      {listedItems.map((item, k) => {
+        return <NFT key={k} item={item}/>
+      })}
+    </Container>
     <Typography variant='h4' component='h2'>NFTToken</Typography>
     <table style={{width: '100%', textAlign: 'center'}}>
       <thead>
@@ -98,9 +100,9 @@ function HomePage() {
       </thead>
       <tbody>
       <tr>
-        <td>{totalSupply}</td>
-        <td>{marketLiquidity}</td>
-        <td>{tokenBalance}</td>
+        <td>{totalSupply.toFixed(2)}</td>
+        <td>{marketLiquidity.toFixed(2)}</td>
+        <td>{tokenBalance.toFixed(2)}</td>
       </tr>
       </tbody>
     </table>

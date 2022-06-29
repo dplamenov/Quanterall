@@ -10,12 +10,14 @@ import Create from "./pages/Create";
 import Marketplace from "./pages/Marketplace";
 import NFTToken from "./pages/NFTToken";
 import NFTPage from "./pages/NFTPage";
+import BetaVersion from "./components/BetaVersion";
 
 function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Header/>
+        <BetaVersion/>
         <Container>
           <Routes>
             <Route exact path="/" element={<PrivateRoute element={<HomePage/>}/>}/>

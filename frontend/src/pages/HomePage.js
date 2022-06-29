@@ -57,15 +57,15 @@ function HomePage() {
   useEffect(() => {
     loadListedItems();
     nftToken.totalSupply().then(totalSupply => {
-      setTotalSupply(ethers.utils.formatEther(totalSupply));
+      setTotalSupply(+ethers.utils.formatEther(totalSupply));
     })
 
     nftToken.balanceOf(contracts.TokenMarketplace).then(l => {
-      setMarketLiquidity(ethers.utils.formatEther(l));
+      setMarketLiquidity(+ethers.utils.formatEther(l));
     });
 
     nftToken.balanceOf(account).then(balance => {
-      setTokenBalance(ethers.utils.formatEther(balance));
+      setTokenBalance(+ethers.utils.formatEther(balance));
     });
   }, []);
 

@@ -17,7 +17,7 @@ function Create() {
   const marketplace = new ethers.Contract(contracts.Marketplace, marketplaceABI, signer);
   const nft = new ethers.Contract(contracts.NFT, NFTABI, signer);
 
-  const [image, setImage] = useState();
+  const [image, setImage] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const navigate = useNavigate();
@@ -44,12 +44,11 @@ function Create() {
       <Typography component='h1' variant='h1'>Create</Typography>
       <Container maxWidth={false} disableGutters sx={{display: 'flex', gap: '30px'}}>
         <Container maxWidth={false} disableGutters sx={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
-          <Typography component='h5' variant='h5'>Upload file for NFT</Typography>
 
-          <label className="custom-file-upload">
+          {image.length === 0 ? <label className="custom-file-upload" htmlFor='file-upload'>
             <Input type="file" id='file-upload' onChange={uploadFileHandler} sx={{display: 'none'}}/>
-            <p style={{color: '#1976d2', cursor: 'pointer'}}>Upload file</p>
-          </label>
+            <p style={{color: '#1976d2', cursor: 'pointer'}}>Upload image for NFT</p>
+          </label> : 'Uploaded'}
           <TextField id="title-input" label="Title" variant="outlined" onChange={e => setTitle(e.target.value)}
                      value={title}/>
           <TextField id="description-input" label="Description" variant="outlined" rows={5} multiline

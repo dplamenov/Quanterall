@@ -74,16 +74,20 @@ function Profile() {
 
     <Typography component='h3' variant='h3'>Info</Typography>
     <table style={{width: '100%', textAlign: 'center'}}>
+      <thead>
       <tr>
         <th>Address</th>
         <th>Ether balance</th>
         <th>NFTToken balance</th>
       </tr>
+      </thead>
+      <tbody>
       <tr>
         <td>{data.account}</td>
         <td>{Number(balance).toFixed(2)} ETH</td>
         <td>{Number(tokenBalance).toFixed(2)}</td>
       </tr>
+      </tbody>
     </table>
 
     <Typography component='h3' variant='h3'>My NFTs</Typography>

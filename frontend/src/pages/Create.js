@@ -44,7 +44,6 @@ function Create() {
       <Typography component='h1' variant='h1'>Create</Typography>
       <Container maxWidth={false} disableGutters sx={{display: 'flex', gap: '30px'}}>
         <Container maxWidth={false} disableGutters sx={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
-
           {image.length === 0 ? <label className="custom-file-upload" htmlFor='file-upload'>
             <Input type="file" id='file-upload' onChange={uploadFileHandler} sx={{display: 'none'}}/>
             <p style={{color: '#1976d2', cursor: 'pointer'}}>Upload image for NFT</p>
@@ -55,7 +54,8 @@ function Create() {
                      onChange={e => setDescription(e.target.value)} value={description}/>
           <Button onClick={handleCreate} variant='contained' sx={{alignSelf: 'flex-start'}}>Create</Button>
         </Container>
-        <Container maxWidth={false} disableGutters sx={{width: '30%'}}>
+        <Container maxWidth={false} disableGutters
+                   sx={{width: '30%', display: image && description && title ? 'block' : 'none'}}>
           <Typography component='h3' variant='h3'>Preview:</Typography>
           <NFT item={{title, description, image}}/>
         </Container>

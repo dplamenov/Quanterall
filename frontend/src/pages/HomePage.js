@@ -71,6 +71,17 @@ function HomePage() {
 
   return <>
     <Typography variant='h1' component='h1'>Home page</Typography>
+
+    <Typography component='p' variant='p' sx={{textAlign: 'justify'}}>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad amet cupiditate
+      eos fugit ipsam nemo neque voluptate! Ad, alias aspernatur aut deserunt dolore eius eveniet excepturi expedita
+      fuga harum laudantium officia pariatur perspiciatis quam rem repudiandae similique voluptates. Consequatur culpa
+      expedita mollitia nulla officiis omnis sed vero? Accusamus alias aliquam asperiores corporis cumque deleniti
+      dignissimos dolore dolorem doloremque hic illo incidunt inventore itaque laboriosam laborum minima mollitia nemo
+      nisi nulla quae quia, quidem quod quos soluta ut voluptas voluptatibus? Aliquam aliquid asperiores cupiditate
+      dolores ducimus eaque, esse, eveniet facere illo labore modi nihil obcaecati quisquam repellendus unde veniam
+      voluptatem voluptatum.
+    </Typography>
     <Typography variant='h4' component='h2'>Latest NFTs in marketplace</Typography>
     {listedItems.length === 0 && <Typography component='p' variant='p'>No NFTs in marketplace</Typography>}
     {listedItems.map((item, k) => {

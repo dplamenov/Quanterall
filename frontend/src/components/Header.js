@@ -32,9 +32,8 @@ function Header() {
   return <Box component="div">
     <AppBar position="static">
       <Toolbar>
-
         <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-          NIPFI
+          <Link to="/">NIPFI</Link>
         </Typography>
         <Button color="inherit">
           <Link to="/">Home</Link>

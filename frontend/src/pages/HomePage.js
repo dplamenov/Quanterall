@@ -72,6 +72,7 @@ function HomePage() {
   return <>
     <Typography variant='h1' component='h1'>Home page</Typography>
     <Typography variant='h4' component='h2'>Latest NFTs in marketplace</Typography>
+    {listedItems.length === 0 && <Typography component='p' variant='p'>No NFTs in marketplace</Typography>}
     {listedItems.map((item, k) => {
       return <NFT key={k} item={item}/>
     })}

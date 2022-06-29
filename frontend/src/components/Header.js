@@ -1,4 +1,4 @@
-import {AppBar, Box, Toolbar, Typography, Button, IconButton} from '@mui/material';
+import {AppBar, Box, Toolbar, Typography, Button} from '@mui/material';
 import {Link} from "react-router-dom";
 import {ethers} from 'ethers';
 import {useDispatch, useSelector} from "react-redux";

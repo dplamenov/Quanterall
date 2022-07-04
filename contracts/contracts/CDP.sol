@@ -35,7 +35,7 @@ contract CDP {
             repaymentAmount <= vaults[msg.sender].debt,
             "withdraw limit exceeded"
         );
-        uint256 amountToWithdraw = repaymentAmount / getEthUSDPrice();
+        uint256 amountToWithdraw = repaymentAmount / getTokenPrice();
         IERC20(token).transferFrom(msg.sender, address(this), repaymentAmount);
         vaults[msg.sender].collateral -= amountToWithdraw;
         vaults[msg.sender].debt -= repaymentAmount;

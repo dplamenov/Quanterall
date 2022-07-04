@@ -4,6 +4,8 @@ Go to [application](http://nipfi.sharkdev.eu)
 
 decentralized finance application deployed on **ropsten** network
 
+Ropsten Ethereum (also known as “Ethereum Testnet”) is an Ethereum test network that allows for blockchain development testing before deployment on Mainnet, the main Ethereum network.
+
 ## Ideas behind NipFI
 1. Open source
 2. 100% decentralized application

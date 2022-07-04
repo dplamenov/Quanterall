@@ -1,5 +1,7 @@
 # [NipFI - decentralized finance application](http://nipfi.sharkdev.eu)
 
+Go to [application](http://nipfi.sharkdev.eu)
+
 decentralized finance application deployed on **ropsten** network
 
 ## Ideas behind NipFI
@@ -25,8 +27,7 @@ decentralized finance application deployed on **ropsten** network
 1. Earn interest on tokens
 2. Better UI/UX
 3. Auction variant at NFT marketplace
-4. Lending
-5. NFT Collections
+4. NFT Collections
 
 
 More at [our first presentation](https://github.com/dplamenov/nipfi/blob/main/nipfi.pdf)

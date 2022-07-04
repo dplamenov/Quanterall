@@ -50,6 +50,8 @@ function Lending() {
       <Button variant='contained' onClick={lend}>Deposit</Button>
     </Container>
     <p>You will get {Number(tokens).toFixed(2)} tokens</p>
+
+    <h1>SOON...</h1>
   </>
 }
 

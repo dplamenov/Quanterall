@@ -4,7 +4,6 @@ import {ethers} from "ethers";
 import contracts from "../contracts/contracts.json";
 import CDPABI from "../contracts/CDPABI.json";
 import {useEffect, useState} from "react";
-import NFTTokenABI from "../contracts/NFTTokenABI.json";
 import Button from "@mui/material/Button";
 
 function Lending() {
@@ -12,8 +11,7 @@ function Lending() {
   const cdp = new ethers.Contract(contracts.CDP, CDPABI, signer);
   const [lendEth, setLendEth] = useState("1");
   const [tokens, setTokens] = useState(0);
-  // const nftToken = new ethers.Contract(contracts.NFTToken, NFTTokenABI, signer);
-  //
+
   useEffect(() => {
     cdp.estimateTokenAmount(ethers.utils.parseEther('1')).then(data => {
       setTokens(ethers.utils.formatEther(data));

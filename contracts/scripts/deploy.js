@@ -32,21 +32,30 @@ async function main() {
   await tokenMarketplace.deployed();
   console.log("TokenMarketplace deployed to:", tokenMarketplace.address);
 
+  const CDP = await hre.ethers.getContractFactory("CDP");
+  const cdp = await CDP.deploy(nftToken.address, tokenMarketplace.address);
+
+  await cdp.deployed();
+  console.log("CDP deployed to:", cdp.address);
+
   const NFTTokenABI = JSON.parse(fs.readFileSync('artifacts/contracts/NFTToken.sol/NFTToken.json', {encoding: 'utf-8'})).abi;
   const NFTABI = JSON.parse(fs.readFileSync('artifacts/contracts/NFT.sol/NFT.json', {encoding: 'utf-8'})).abi;
   const MarketplaceABI = JSON.parse(fs.readFileSync('artifacts/contracts/Marketplace.sol/Marketplace.json', {encoding: 'utf-8'})).abi;
   const TokenMarketplaceABI = JSON.parse(fs.readFileSync('artifacts/contracts/TokenMarketplace.sol/TokenMarketplace.json', {encoding: 'utf-8'})).abi;
+  const CDPABI = JSON.parse(fs.readFileSync('artifacts/contracts/CDP.sol/CDP.json', {encoding: 'utf-8'})).abi;
 
   fs.writeFileSync('../frontend/src/contracts/NFTTokenABI.json', JSON.stringify(NFTTokenABI));
   fs.writeFileSync('../frontend/src/contracts/NFTABI.json', JSON.stringify(NFTABI));
   fs.writeFileSync('../frontend/src/contracts/MarketplaceABI.json', JSON.stringify(MarketplaceABI));
   fs.writeFileSync('../frontend/src/contracts/TokenMarketplaceABI.json', JSON.stringify(TokenMarketplaceABI));
+  fs.writeFileSync('../frontend/src/contracts/CDPABI.json', JSON.stringify(CDPABI));
 
   fs.writeFileSync('../frontend/src/contracts/contracts.json', JSON.stringify({
     NFTToken: nftToken.address,
     NFT: nft.address,
     Marketplace: marketplace.address,
-    TokenMarketplace: tokenMarketplace.address
+    TokenMarketplace: tokenMarketplace.address,
+    CDP: cdp.address
   }));
 
 }

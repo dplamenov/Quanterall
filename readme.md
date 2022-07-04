@@ -25,8 +25,7 @@ decentralized finance application deployed on **ropsten** network
 1. Earn interest on tokens
 2. Better UI/UX
 3. Auction variant at NFT marketplace
-4. Lending
-5. NFT Collections
+4. NFT Collections
 
 
 More at [our first presentation](https://github.com/dplamenov/nipfi/blob/main/nipfi.pdf)

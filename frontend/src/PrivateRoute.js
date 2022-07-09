@@ -14,11 +14,10 @@ const PrivateRoute = ({element}) => {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const accounts = await provider.send("eth_requestAccounts", []);
       dispatch(connect({provider, signer: provider.getSigner(), account: accounts[0]}));
+      return !!accounts[0];
     } catch(err) {
       console.log(err);
     }
-
-    return !!accounts[0];
   };
 
   useEffect(() => {

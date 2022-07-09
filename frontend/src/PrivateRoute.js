@@ -10,14 +10,10 @@ const PrivateRoute = ({element}) => {
   const account = useSelector(state => state.web3.account);
 
   const connectCb = async () => {
-    try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
-      const accounts = await provider.send("eth_requestAccounts", []);
-      dispatch(connect({provider, signer: provider.getSigner(), account: accounts[0]}));
-      return !!accounts[0];
-    } catch(err) {
-      console.log(err);
-    }
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const accounts = await provider.send("eth_requestAccounts", []);
+    dispatch(connect({provider, signer: provider.getSigner(), account: accounts[0]}));
+    return !!accounts[0];
   };
 
   useEffect(() => {
@@ -26,7 +22,7 @@ const PrivateRoute = ({element}) => {
     });
   }, [setIsLoaded]);
 
-  return isLoaded ? (account ? element : <Navigate to="/"/>) : <h1>loading...</h1>;
+  return isLoaded ? (account ? element : <Navigate to="/"/>) : <h1>loading... open metamask to connect</h1>;
 }
 
 export default PrivateRoute;

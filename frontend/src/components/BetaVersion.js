@@ -1,9 +1,9 @@
-import {Typography} from "@mui/material";
+import {Container, Typography} from "@mui/material";
 
 function BetaVersion() {
-  return <div style={{backgroundColor: 'red', color: 'white', textAlign: 'center'}}>
+  return <Container disableGutters maxWidth={false} sx={{backgroundColor: 'red', color: 'white', textAlign: 'center'}}>
     <Typography variant='h6' component='p'>Beta version! You can lose money!</Typography>
-  </div>
+  </Container>
 }
 
 export default BetaVersion;

@@ -1,11 +1,11 @@
-import {Container, Typography} from "@mui/material";
-import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
+import {Container, Typography} from "@mui/material";
+import {ethers} from 'ethers';
+import {useSelector} from "react-redux";
+import NFT from "../components/NFT";
 import contracts from "../contracts/contracts.json";
 import marketplaceABI from "../contracts/MarketplaceABI.json";
 import NFTABI from "../contracts/NFTABI.json";
-import {ethers} from 'ethers';
-import NFT from "../components/NFT";
 
 function Marketplace() {
   const signer = useSelector(state => state.web3.signer);

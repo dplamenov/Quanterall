@@ -1,11 +1,11 @@
-import {Container, Typography} from "@mui/material";
+import {useState, useEffect} from "react";
+import {Container, Table, TableBody, TableCell, TableHead, TableRow, Typography} from "@mui/material";
 import {useSelector} from "react-redux";
 import {ethers} from "ethers";
+import NFT from "../components/NFT";
 import contracts from "../contracts/contracts.json";
 import marketplaceABI from "../contracts/MarketplaceABI.json";
 import NFTABI from "../contracts/NFTABI.json";
-import {useState, useEffect} from "react";
-import NFT from "../components/NFT";
 import NFTTokenABI from "../contracts/NFTTokenABI.json";
 
 function HomePage() {
@@ -25,7 +25,7 @@ function HomePage() {
     const itemCount = await marketplace.itemCount();
     const listedItems = []
 
-    for (let index = 1; index <= itemCount; index++) {
+    for (let index = 1; index <= Math.min(itemCount, 4); index++) {
       const i = await marketplace.items(index)
       const uri = await nft.tokenURI(i.tokenId)
       const response = await fetch(uri)
@@ -41,13 +41,8 @@ function HomePage() {
         image: metadata.image
       }
 
-
       if (i.forSale) {
         listedItems.push(item);
-      }
-
-      if (listedItems.length === 4) {
-        break;
       }
     }
 
@@ -71,7 +66,6 @@ function HomePage() {
 
   return <>
     <Typography variant='h1' component='h1'>Home page</Typography>
-
     <Typography component='p' variant='p' sx={{textAlign: 'justify'}}>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad amet cupiditate
       eos fugit ipsam nemo neque voluptate! Ad, alias aspernatur aut deserunt dolore eius eveniet excepturi expedita
@@ -89,23 +83,29 @@ function HomePage() {
         return <NFT key={k} item={item}/>
       })}
     </Container>
-    <Typography variant='h4' component='h2'>NFTToken</Typography>
-    <table style={{width: '100%', textAlign: 'center'}}>
-      <thead>
-      <tr>
-        <th>Total supply</th>
-        <th>Current market liquidity</th>
-        <th>Your balance</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td>{totalSupply.toFixed(2)}</td>
-        <td>{marketLiquidity.toFixed(2)}</td>
-        <td>{tokenBalance.toFixed(2)}</td>
-      </tr>
-      </tbody>
-    </table>
+    <Typography variant='h4' component='h2'>NFTToken stats</Typography>
+    <Table size="small">
+      <TableHead>
+        <TableRow>
+          <TableCell>Total supply</TableCell>
+          <TableCell>Current market liquidity</TableCell>
+          <TableCell>Your balance</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+          <TableRow>
+            <TableCell component="th">
+              {totalSupply.toFixed(2)}
+            </TableCell>
+            <TableCell component="th">
+              {marketLiquidity.toFixed(2)}
+            </TableCell>
+            <TableCell component="th">
+              {tokenBalance.toFixed(2)}
+            </TableCell>
+          </TableRow>
+      </TableBody>
+    </Table>
   </>
 }
 

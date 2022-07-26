@@ -49,7 +49,6 @@ function Lending() {
       <Button variant='contained' onClick={lend}>Deposit</Button>
     </Container>
     <Typography component="p" variant='p'>You will get {Number(tokens).toFixed(2)} tokens</Typography>
-
     <Typography component='h1' variant='h1'>SOON...</Typography>
   </>
 }

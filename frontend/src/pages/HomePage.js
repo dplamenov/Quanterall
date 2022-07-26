@@ -66,7 +66,6 @@ function HomePage() {
 
   return <>
     <Typography variant='h1' component='h1'>Home page</Typography>
-
     <Typography component='p' variant='p' sx={{textAlign: 'justify'}}>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad amet cupiditate
       eos fugit ipsam nemo neque voluptate! Ad, alias aspernatur aut deserunt dolore eius eveniet excepturi expedita

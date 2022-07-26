@@ -1,14 +1,12 @@
+import {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
 import {Typography, Button, TextField, Container} from '@mui/material';
 import {useSelector} from "react-redux";
 import {ethers} from "ethers";
 import contracts from "../contracts/contracts.json";
 import marketplaceABI from "../contracts/MarketplaceABI.json";
-import {useEffect, useState} from "react";
 import NFTABI from "../contracts/NFTABI.json";
-import {useParams} from "react-router";
-import * as React from "react";
 import NFTTokenABI from "../contracts/NFTTokenABI.json";
-import {useNavigate} from "react-router-dom";
 
 function NFTPage() {
   const signer = useSelector(state => state.web3.signer);

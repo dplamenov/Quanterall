@@ -1,9 +1,9 @@
+import {useEffect, useState} from "react";
 import {Container, Typography} from "@mui/material";
 import {useSelector} from "react-redux";
-import {useEffect, useState} from "react";
 import {ethers} from 'ethers';
-import NFTTokenABI from '../contracts/NFTABI.json';
 import contracts from "../contracts/contracts.json";
+import NFTTokenABI from '../contracts/NFTABI.json';
 import marketplaceABI from "../contracts/MarketplaceABI.json";
 import NFTABI from "../contracts/NFTABI.json";
 import NFT from "../components/NFT";

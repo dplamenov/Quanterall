@@ -42,15 +42,15 @@ function Lending() {
 
   return <>
     <Typography component='h1' variant='h1'>Lending</Typography>
-      <Typography component="p" variant='h5'>Deposit ETH to get NFTToken</Typography>
-    <p>You can lend up to {Number(maxLend).toFixed(2)} tokens</p>
-    <Container disableGutters maxWidth={false} sx={{display: 'flex', gap: '10px'}}>
+    <Typography component="p" variant='h4'>Deposit ETH to get NFTToken</Typography>
+    <Typography component="p" variant='p'>You can lend up to {Number(maxLend).toFixed(2)} tokens</Typography>
+    <Container disableGutters maxWidth={false} sx={{display: 'flex', gap: '10px', margin: '20px 0'}}>
       <TextField id="eth" label="ETH" variant="outlined" type='number' value={lendEth} onChange={handleLendEthChange}/>
       <Button variant='contained' onClick={lend}>Deposit</Button>
     </Container>
-    <p>You will get {Number(tokens).toFixed(2)} tokens</p>
+    <Typography component="p" variant='p'>You will get {Number(tokens).toFixed(2)} tokens</Typography>
 
-    <h1>SOON...</h1>
+    <Typography component='h1' variant='h1'>SOON...</Typography>
   </>
 }
 

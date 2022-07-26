@@ -3,11 +3,11 @@ import {create as ipfsHttpClient} from 'ipfs-http-client'
 import {ethers} from 'ethers';
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
+import {Container, Typography, Input, TextField, Button} from "@mui/material";
+import NFT from "../components/NFT";
 import contracts from "../contracts/contracts.json";
 import marketplaceABI from "../contracts/MarketplaceABI.json";
 import NFTABI from "../contracts/NFTABI.json";
-import {Container, Typography, Input, TextField, Button} from "@mui/material";
-import NFT from "../components/NFT";
 
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 

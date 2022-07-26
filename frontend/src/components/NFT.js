@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Card, CardActions, CardContent, CardMedia, Button, Typography} from '@mui/material';
 import {ethers} from 'ethers';
 import {Link} from "react-router-dom";

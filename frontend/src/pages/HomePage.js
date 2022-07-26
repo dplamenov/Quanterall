@@ -1,11 +1,11 @@
+import {useState, useEffect} from "react";
 import {Container, Typography} from "@mui/material";
 import {useSelector} from "react-redux";
 import {ethers} from "ethers";
+import NFT from "../components/NFT";
 import contracts from "../contracts/contracts.json";
 import marketplaceABI from "../contracts/MarketplaceABI.json";
 import NFTABI from "../contracts/NFTABI.json";
-import {useState, useEffect} from "react";
-import NFT from "../components/NFT";
 import NFTTokenABI from "../contracts/NFTTokenABI.json";
 
 function HomePage() {

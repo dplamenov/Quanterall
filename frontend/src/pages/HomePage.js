@@ -25,7 +25,7 @@ function HomePage() {
     const itemCount = await marketplace.itemCount();
     const listedItems = []
 
-    for (let index = 1; index <= itemCount; index++) {
+    for (let index = 1; index <= Math.min(itemCount, 4); index++) {
       const i = await marketplace.items(index)
       const uri = await nft.tokenURI(i.tokenId)
       const response = await fetch(uri)
@@ -41,13 +41,8 @@ function HomePage() {
         image: metadata.image
       }
 
-
       if (i.forSale) {
         listedItems.push(item);
-      }
-
-      if (listedItems.length === 4) {
-        break;
       }
     }
 

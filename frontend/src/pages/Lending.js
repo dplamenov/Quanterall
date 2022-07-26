@@ -1,10 +1,9 @@
-import {Container, TextField, Typography} from "@mui/material";
+import {useEffect, useState} from "react";
+import {Container, TextField, Typography, Button} from "@mui/material";
 import {useSelector} from "react-redux";
 import {ethers} from "ethers";
 import contracts from "../contracts/contracts.json";
 import CDPABI from "../contracts/CDPABI.json";
-import {useEffect, useState} from "react";
-import Button from "@mui/material/Button";
 import NFTTokenABI from "../contracts/NFTTokenABI.json";
 
 function Lending() {

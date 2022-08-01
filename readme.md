@@ -1,6 +1,4 @@
-# [NipFI - decentralized finance application](http://nipfi.sharkdev.eu)
-
-Go to [application](http://nipfi.sharkdev.eu)
+# NipFI - decentralized finance application
 
 decentralized finance application deployed on **ropsten** network
 
@@ -30,6 +28,3 @@ Ropsten Ethereum (also known as “Ethereum Testnet”) is an Ethereum test netw
 2. Better UI/UX
 3. Auction variant at NFT marketplace
 4. NFT Collections
-
-
-More at [our first presentation](https://github.com/dplamenov/nipfi/blob/main/nipfi.pdf)
